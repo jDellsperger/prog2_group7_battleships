@@ -1,9 +1,10 @@
 package prog2_group7_battleships.ctrl;
 
+import prog2_group7_battleships.enums.GameMode;
 import prog2_group7_battleships.ihm.View;
 import prog2_group7_battleships.wrk.Game;
-import prog2_group7_battleships.wrk.Orientation;
-import prog2_group7_battleships.wrk.ShipType;
+import prog2_group7_battleships.enums.Orientation;
+import prog2_group7_battleships.enums.ShipType;
 
 public class Controller {
 
@@ -16,16 +17,16 @@ public class Controller {
     }
 
     public void start() {
-        this.view.queryPlacement();
+        this.view.queryMode();
+    }
+
+    public void setGameMode(GameMode mode) {
+        this.game.setGameMode(mode);
     }
 
     public void placeShip(Orientation orientation, ShipType type, int xCoordinate, int yCoordinate) {
-        if (this.game.placeShip(orientation, type, xCoordinate, yCoordinate)) {
-            System.out.println("Controller placeShip: Ship was placed at coordinates x:"
-                    + xCoordinate + ", y:" + yCoordinate + " with length " + type.getLength());
-        } else {
-            System.out.println("Ship placement failed...");
-        }
+        this.view.displayMessage(this.game.placeShip(orientation, type, xCoordinate, yCoordinate).getMessage());
+        this.view.queryPlacement();
     }
 
 }

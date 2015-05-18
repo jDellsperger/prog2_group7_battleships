@@ -1,4 +1,4 @@
-package prog2_group7_battleships.wrk;
+package prog2_group7_battleships.enums;
 
 public enum ShipType {
 

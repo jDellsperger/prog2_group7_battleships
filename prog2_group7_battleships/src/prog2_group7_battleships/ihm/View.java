@@ -2,8 +2,9 @@ package prog2_group7_battleships.ihm;
 
 import java.util.Scanner;
 import prog2_group7_battleships.ctrl.Controller;
-import prog2_group7_battleships.wrk.Orientation;
-import prog2_group7_battleships.wrk.ShipType;
+import prog2_group7_battleships.enums.GameMode;
+import prog2_group7_battleships.enums.Orientation;
+import prog2_group7_battleships.enums.ShipType;
 
 public class View {
 
@@ -62,6 +63,28 @@ public class View {
         yCoordinate = Integer.parseInt(s.next());
 
         this.ctrl.placeShip(orientation, type, xCoordinate, yCoordinate);
+    }
+
+    public void displayMessage(String message) {
+        System.out.println(message);
+    }
+
+    public void queryMode() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("The game mode (s = single, m = multi)");
+        GameMode mode = null;
+        switch (s.next()) {
+            case "s":
+                mode = GameMode.SINGLE;
+                break;
+            case "m":
+                mode = GameMode.MULTI;
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+                System.exit(0);
+        }
+
     }
 
 }

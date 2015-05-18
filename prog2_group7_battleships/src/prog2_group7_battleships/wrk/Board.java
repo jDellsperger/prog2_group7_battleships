@@ -1,6 +1,8 @@
 package prog2_group7_battleships.wrk;
 
+import prog2_group7_battleships.enums.Orientation;
 import java.util.ArrayList;
+import prog2_group7_battleships.enums.ReturnCode;
 
 public class Board {
 
@@ -16,34 +18,38 @@ public class Board {
         }
     }
 
-    boolean placeShip(int xCoordinate, int yCoordinate, Orientation orientation, Ship ship) {
-        boolean shipPlaced = false;
+    ReturnCode placeShip(int xCoordinate, int yCoordinate, Orientation orientation, Ship ship) {
         ArrayList<Field> targetedFields = new ArrayList();
-        switch (orientation) {
-            case HORIZONTAL:
-                for (int x = 0; x < ship.getType().getLength(); x++) {
-                    if (!fields[x][yCoordinate].isOccupied()) {
-                        targetedFields.add(fields[x][yCoordinate]);
+        ReturnCode returnCode;
+        try {
+            switch (orientation) {
+                case HORIZONTAL:
+                    for (int x = 0; x < ship.getType().getLength(); x++) {
+                        if (!fields[x + xCoordinate][yCoordinate].isOccupied()) {
+                            targetedFields.add(fields[x][yCoordinate]);
+                        }
                     }
-                }
-                break;
-            case VERTICAL:
-                for (int y = 0; y < ship.getType().getLength(); y++) {
-                    if (!fields[xCoordinate][y].isOccupied()) {
-                        targetedFields.add(fields[xCoordinate][y]);
+                    break;
+                case VERTICAL:
+                    for (int y = 0; y < ship.getType().getLength(); y++) {
+                        if (!fields[xCoordinate][y + yCoordinate].isOccupied()) {
+                            targetedFields.add(fields[xCoordinate][y]);
+                        }
                     }
-                }
-                break;
-        }
-        System.out.println("targetedFields.size: " + targetedFields.size());
-        System.out.println("ship.type.size: " + ship.getType().getLength());
-        if (targetedFields.size() == ship.getType().getLength()) {
-            for (Field targetedField : targetedFields) {
-                targetedField.setShip(ship);
+                    break;
             }
-            shipPlaced = true;
+            if (targetedFields.size() == ship.getType().getLength()) {
+                for (Field targetedField : targetedFields) {
+                    targetedField.setShip(ship);
+                }
+                returnCode = ReturnCode.PLACED_SUCESSFULLY;
+            } else {
+                returnCode = ReturnCode.NOT_FREE;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            returnCode = ReturnCode.INDEX_OUT_OF_BOUND;
         }
-        return shipPlaced;
+        return returnCode;
     }
 
 }

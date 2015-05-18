@@ -1,5 +1,7 @@
 package prog2_group7_battleships.wrk;
 
+import prog2_group7_battleships.enums.ShipType;
+
 public class Ship {
 
     private final ShipType type;

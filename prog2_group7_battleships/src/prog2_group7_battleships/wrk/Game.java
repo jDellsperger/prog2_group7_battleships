@@ -1,42 +1,41 @@
 package prog2_group7_battleships.wrk;
 
+import prog2_group7_battleships.enums.ShipType;
+import prog2_group7_battleships.enums.Orientation;
+import prog2_group7_battleships.enums.GameMode;
+import prog2_group7_battleships.enums.GameState;
+import prog2_group7_battleships.enums.ReturnCode;
+
 public class Game {
 
-    private Board board;
     private Player player1;
     private Player player2;
-    private Player activePlayer;
+    private GameMode mode;
+    private GameState state;
 
-    public Game(GameMode mode) {
-        this.board = new Board();
-        switch (mode) {
-            case SINGLE:
-                player1 = new Player();
-                player2 = new Player();
-                break;
-            case MULTI_CLIENT:
-                break;
-            case MULTI_SERVER:
-                break;
-        }
-        activePlayer = player1;
+    public Game() {
+        state = GameState.MODE_SELECT;
+        player1 = new Player();
+        player2 = new Player();
     }
 
-    public boolean placeShip(Orientation orientation, ShipType type, int xCoordinate, int yCoordinate) {
-        boolean shipPlaced = false;
-
-        // check if player still has ship available
-        try {
-            Ship ship = activePlayer.getUnplacedShipByType(type);
-            ship.setPlaced(this.board.placeShip(xCoordinate, yCoordinate, orientation, ship));
-            if (ship.isPlaced()) {
-                shipPlaced = true;
-            }
-        } catch (NullPointerException ex) {
-            shipPlaced = false;
+    public ReturnCode placeShip(Orientation orientation, ShipType type, int xCoordinate, int yCoordinate) {
+        ReturnCode returnCode;
+        switch (state) {
+            case P1_PLACEMENT:
+                returnCode = this.player1.placeShip(orientation, type, xCoordinate, yCoordinate);
+                break;
+            case P2_PLACEMENT:
+                returnCode = this.player2.placeShip(orientation, type, xCoordinate, yCoordinate);
+                break;
+            default:
+                returnCode = ReturnCode.INVALID_GAMESTATE;
         }
+        return returnCode;
+    }
 
-        return shipPlaced;
+    public void setGameMode(GameMode mode) {
+        this.mode = mode;
     }
 
 }
