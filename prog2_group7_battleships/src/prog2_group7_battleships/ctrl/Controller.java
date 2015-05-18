@@ -22,11 +22,44 @@ public class Controller {
 
     public void setGameMode(GameMode mode) {
         this.game.setGameMode(mode);
+        this.stateSwitch();
     }
 
     public void placeShip(Orientation orientation, ShipType type, int xCoordinate, int yCoordinate) {
         this.view.displayMessage(this.game.placeShip(orientation, type, xCoordinate, yCoordinate).getMessage());
-        this.view.queryPlacement();
+        this.stateSwitch();
+    }
+
+    private void stateSwitch() {
+        switch (this.game.getGameState()) {
+            case P1_PLACEMENT:
+                this.view.displayMessage("Player 1 ship placement");
+                this.view.queryPlacement();
+                break;
+            case P2_PLACEMENT:
+                this.view.displayMessage("Player 2 ship placement");
+                this.view.queryPlacement();
+                break;
+            case P1_SHOOTING:
+                this.view.displayMessage("Player 1 shooting");
+                this.view.queryShooting();
+                break;
+            case P2_SHOOTING:
+                this.view.displayMessage("Player 2 shooting");
+                this.view.queryShooting();
+                break;
+            case GAME_OVER:
+                this.view.displayMessage("The game is over.");
+                System.exit(0);
+                break;
+            default:
+                this.view.displayMessage("Invalid state");
+        }
+    }
+
+    public void shoot(int xCoordinate, int yCoordinate) {
+        this.view.displayMessage(this.game.shoot(xCoordinate, yCoordinate).getMessage());
+        this.stateSwitch();
     }
 
 }

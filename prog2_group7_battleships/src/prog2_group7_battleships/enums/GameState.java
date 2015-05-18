@@ -11,6 +11,6 @@ package prog2_group7_battleships.enums;
  */
 public enum GameState {
 
-    MODE_SELECT, P1_PLACEMENT, P2_PLACEMENT, P1_SHOOTING, P2_SHOOTING;
+    MODE_SELECT, P1_PLACEMENT, P2_PLACEMENT, P1_SHOOTING, P2_SHOOTING, GAME_OVER;
 
 }

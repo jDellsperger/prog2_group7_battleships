@@ -56,4 +56,23 @@ public class Player {
         return isDone;
     }
 
+    public ReturnCode shotAt(int xCoordinate, int yCoordinate) {
+        ReturnCode returnCode = this.board.shotAt(xCoordinate, yCoordinate);
+        if (returnCode == ReturnCode.SHIP_HIT && !this.hasUnsunkShips()) {
+            returnCode = ReturnCode.PLAYER_LOST;
+        }
+        return returnCode;
+    }
+
+    private boolean hasUnsunkShips() {
+        boolean hasUnsunkShips = false;
+        for (Ship ship : ships) {
+            if (!ship.isSunk()) {
+                hasUnsunkShips = true;
+                break;
+            }
+        }
+        return hasUnsunkShips;
+    }
+
 }

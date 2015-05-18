@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import prog2_group7_battleships.enums.GameMode;
 import prog2_group7_battleships.enums.Orientation;
 import prog2_group7_battleships.enums.ReturnCode;
 import prog2_group7_battleships.enums.ShipType;
@@ -51,6 +52,7 @@ public class GameTest {
         int xCoordinate = 0;
         int yCoordinate = 0;
         Game instance = new Game();
+        instance.setGameMode(GameMode.SINGLE);
         ReturnCode expResult = ReturnCode.PLACED_SUCESSFULLY;
         ReturnCode result = instance.placeShip(orientation, type, xCoordinate, yCoordinate);
         assertEquals(expResult, result);

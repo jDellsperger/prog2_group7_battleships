@@ -84,7 +84,21 @@ public class View {
                 System.out.println("Invalid Input!!");
                 System.exit(0);
         }
+        this.ctrl.setGameMode(mode);
+    }
 
+    public void queryShooting() {
+        Scanner s = new Scanner(System.in);
+        int xCoordinate;
+        int yCoordinate;
+
+        System.out.println("xCoordinate (1 - 10):");
+        xCoordinate = Integer.parseInt(s.next());
+
+        System.out.println("yCoordinate (1 - 10):");
+        yCoordinate = Integer.parseInt(s.next());
+
+        this.ctrl.shoot(xCoordinate, yCoordinate);
     }
 
 }

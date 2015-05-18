@@ -25,15 +25,15 @@ public class Board {
             switch (orientation) {
                 case HORIZONTAL:
                     for (int x = 0; x < ship.getType().getLength(); x++) {
-                        if (!fields[x + xCoordinate][yCoordinate].isOccupied()) {
-                            targetedFields.add(fields[x][yCoordinate]);
+                        if (null == fields[x + xCoordinate][yCoordinate].getShip()) {
+                            targetedFields.add(fields[x + xCoordinate][yCoordinate]);
                         }
                     }
                     break;
                 case VERTICAL:
                     for (int y = 0; y < ship.getType().getLength(); y++) {
-                        if (!fields[xCoordinate][y + yCoordinate].isOccupied()) {
-                            targetedFields.add(fields[xCoordinate][y]);
+                        if (null == fields[xCoordinate][y + yCoordinate].getShip()) {
+                            targetedFields.add(fields[xCoordinate][y + yCoordinate]);
                         }
                     }
                     break;
@@ -45,6 +45,28 @@ public class Board {
                 returnCode = ReturnCode.PLACED_SUCESSFULLY;
             } else {
                 returnCode = ReturnCode.NOT_FREE;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            returnCode = ReturnCode.INDEX_OUT_OF_BOUND;
+        }
+        return returnCode;
+    }
+
+    public ReturnCode shotAt(int xCoordinate, int yCoordinate) {
+        ReturnCode returnCode;
+        try {
+            Field targetedField = fields[xCoordinate][yCoordinate];
+            if (!targetedField.isShotAt()) {
+                targetedField.setShotAt(true);
+                Ship targetedShip = targetedField.getShip();
+                if (null != targetedShip) {
+                    targetedShip.wasHit();
+                    returnCode = ReturnCode.SHIP_HIT;
+                } else {
+                    returnCode = ReturnCode.MISSED;
+                }
+            } else {
+                returnCode = ReturnCode.ALREADY_SHOT_AT;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             returnCode = ReturnCode.INDEX_OUT_OF_BOUND;

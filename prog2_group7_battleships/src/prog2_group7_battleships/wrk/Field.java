@@ -9,16 +9,20 @@ public class Field {
         this.shotAt = false;
     }
 
-    public boolean isOccupied() {
-        boolean isOccupied = false;
-        if (null != this.ship) {
-            isOccupied = true;
-        }
-        return isOccupied;
-    }
-
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public boolean isShotAt() {
+        return this.shotAt;
+    }
+
+    public void setShotAt(boolean shotAt) {
+        this.shotAt = shotAt;
+    }
+
+    public Ship getShip() {
+        return this.ship;
     }
 
 }
