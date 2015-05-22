@@ -61,7 +61,11 @@ public class Board {
                 Ship targetedShip = targetedField.getShip();
                 if (null != targetedShip) {
                     targetedShip.wasHit();
-                    returnCode = ReturnCode.SHIP_HIT;
+                    if (targetedShip.isSunk()) {
+                        returnCode = ReturnCode.SHIP_SUNK;
+                    } else {
+                        returnCode = ReturnCode.SHIP_HIT;
+                    }
                 } else {
                     returnCode = ReturnCode.MISSED;
                 }

@@ -58,7 +58,6 @@ public class Game {
                     case PLAYER_LOST:
                         this.state = GameState.GAME_OVER;
                         break;
-                    case SHIP_HIT:
                     case MISSED:
                         this.state = GameState.P2_SHOOTING;
                         break;
