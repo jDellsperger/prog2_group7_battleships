@@ -35,7 +35,7 @@ public class Player {
         Ship ship = this.getUnplacedShipByType(type);
         if (null != ship) {
             returnCode = this.board.placeShip(xCoordinate, yCoordinate, orientation, ship);
-            if (returnCode == ReturnCode.PLACED_SUCESSFULLY) {
+            if (returnCode == ReturnCode.PLACED_SUCCESSFULLY) {
                 ship.setPlaced(true);
             }
         } else {
@@ -58,7 +58,7 @@ public class Player {
 
     public ReturnCode shotAt(int xCoordinate, int yCoordinate) {
         ReturnCode returnCode = this.board.shotAt(xCoordinate, yCoordinate);
-        if (returnCode == ReturnCode.SHIP_HIT && !this.hasUnsunkShips()) {
+        if (returnCode == ReturnCode.SHIP_SUNK && !this.hasUnsunkShips()) {
             returnCode = ReturnCode.PLAYER_LOST;
         }
         return returnCode;

@@ -37,16 +37,28 @@ public class Controller {
                 this.view.queryPlacement();
                 break;
             case P2_PLACEMENT:
-                this.view.displayMessage("Player 2 ship placement");
-                this.view.queryPlacement();
+                if (this.game.getGameMode() == GameMode.MULTI) {
+                    this.view.displayMessage("Player 2 ship placement");
+                    this.view.queryPlacement();
+                } else {
+                    this.view.displayMessage("AI ship placement");
+                    this.view.displayMessage(this.game.aiPlacement().getMessage());
+                    this.stateSwitch();
+                }
                 break;
             case P1_SHOOTING:
                 this.view.displayMessage("Player 1 shooting");
                 this.view.queryShooting();
                 break;
             case P2_SHOOTING:
-                this.view.displayMessage("Player 2 shooting");
-                this.view.queryShooting();
+                if (this.game.getGameMode() == GameMode.MULTI) {
+                    this.view.displayMessage("Player 2 shooting");
+                    this.view.queryShooting();
+                } else {
+                    this.view.displayMessage("AI shooting");
+                    this.view.displayMessage(this.game.aiShoot().getMessage());
+                    this.stateSwitch();
+                }
                 break;
             case GAME_OVER:
                 this.view.displayMessage("The game is over.");

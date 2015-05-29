@@ -3,7 +3,8 @@ package prog2_group7_battleships.enums;
 public enum ShipType {
 
     CARRIER(5, "Carrier"), BATTLESHIP(4, "Battleship"), SUBMARINE(3, "Submarine"),
-    DESTROYER(3, "Destroyer"), BOAT(2, "Boat");
+    DESTROYER(3, "Destroyer"),
+    BOAT(2, "Boat");
 
     private final int length;
     private final String name;
@@ -15,6 +16,10 @@ public enum ShipType {
 
     public int getLength() {
         return this.length;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }

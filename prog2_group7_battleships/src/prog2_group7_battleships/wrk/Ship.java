@@ -28,14 +28,14 @@ public class Ship {
         return this.type;
     }
 
-    void wasHit() {
+    public void wasHit() {
         this.hitCount++;
         if (this.hitCount >= this.type.getLength()) {
             this.sunk = true;
         }
     }
 
-    boolean isSunk() {
+    public boolean isSunk() {
         return this.sunk;
     }
 

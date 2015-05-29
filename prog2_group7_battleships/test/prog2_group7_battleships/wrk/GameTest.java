@@ -53,7 +53,7 @@ public class GameTest {
         int yCoordinate = 0;
         Game instance = new Game();
         instance.setGameMode(GameMode.SINGLE);
-        ReturnCode expResult = ReturnCode.PLACED_SUCESSFULLY;
+        ReturnCode expResult = ReturnCode.PLACED_SUCCESSFULLY;
         ReturnCode result = instance.placeShip(orientation, type, xCoordinate, yCoordinate);
         assertEquals(expResult, result);
 

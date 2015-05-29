@@ -6,7 +6,7 @@ import prog2_group7_battleships.enums.ReturnCode;
 
 public class Board {
 
-    private Field[][] fields;
+    private final Field[][] fields;
     private final int BOARD_LENGTH = 10;
 
     public Board() {
@@ -25,15 +25,17 @@ public class Board {
             switch (orientation) {
                 case HORIZONTAL:
                     for (int x = 0; x < ship.getType().getLength(); x++) {
-                        if (null == fields[x + xCoordinate][yCoordinate].getShip()) {
-                            targetedFields.add(fields[x + xCoordinate][yCoordinate]);
+                        Field currentField = fields[x + xCoordinate][yCoordinate];
+                        if (null == currentField.getShip() && !currentField.isNextToShip()) {
+                            targetedFields.add(currentField);
                         }
                     }
                     break;
                 case VERTICAL:
                     for (int y = 0; y < ship.getType().getLength(); y++) {
-                        if (null == fields[xCoordinate][y + yCoordinate].getShip()) {
-                            targetedFields.add(fields[xCoordinate][y + yCoordinate]);
+                        Field currentField = fields[xCoordinate][y + yCoordinate];
+                        if (null == currentField.getShip() && !currentField.isNextToShip()) {
+                            targetedFields.add(currentField);
                         }
                     }
                     break;
@@ -42,7 +44,31 @@ public class Board {
                 for (Field targetedField : targetedFields) {
                     targetedField.setShip(ship);
                 }
-                returnCode = ReturnCode.PLACED_SUCESSFULLY;
+                switch (orientation) {
+                    case HORIZONTAL:
+                        for (int y = -1; y <= 1; y++) {
+                            if (yCoordinate + y >= 0 && yCoordinate + y < this.BOARD_LENGTH) {
+                                for (int x = -1; x < ship.getType().getLength() + 1; x++) {
+                                    if (xCoordinate + x >= 0 && xCoordinate + x < this.BOARD_LENGTH) {
+                                        fields[xCoordinate + x][yCoordinate + y].setNextToShip(true);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case VERTICAL:
+                        for (int x = -1; x <= 1; x++) {
+                            if (xCoordinate + x >= 0 && xCoordinate + x < this.BOARD_LENGTH) {
+                                for (int y = -1; y < ship.getType().getLength() + 1; y++) {
+                                    if (yCoordinate + y >= 0 && yCoordinate + y < this.BOARD_LENGTH) {
+                                        fields[xCoordinate + x][yCoordinate + y].setNextToShip(true);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                }
+                returnCode = ReturnCode.PLACED_SUCCESSFULLY;
             } else {
                 returnCode = ReturnCode.NOT_FREE;
             }
