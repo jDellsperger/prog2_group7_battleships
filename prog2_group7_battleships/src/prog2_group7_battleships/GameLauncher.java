@@ -22,7 +22,6 @@ public class GameLauncher extends Application {
         GUIView view = new GUIView(primaryStage);
 
         Controller ctrl = new Controller(view, game);
-        //view.setBattlefieldController(this.controller);
         view.setController(ctrl);
         ctrl.start();
     }

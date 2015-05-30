@@ -1,11 +1,11 @@
 package prog2_group7_battleships.ctrl;
 
 import prog2_group7_battleships.enums.GameMode;
-import prog2_group7_battleships.enums.GameState;
+import prog2_group7_battleships.wrk.Game;
 import prog2_group7_battleships.enums.Orientation;
 import prog2_group7_battleships.enums.ShipType;
 import prog2_group7_battleships.ihm.Viewable;
-import prog2_group7_battleships.wrk.Game;
+import prog2_group7_battleships.wrk.Field;
 
 public class Controller {
 
@@ -75,7 +75,12 @@ public class Controller {
         this.stateSwitch();
     }
 
-    public GameState getGameState() {
-    	return this.game.getGameState();
+    public Field[][] getActivePlayerFields() {
+        return this.game.getActivePlayerFields();
     }
+
+    public Field[][] getInactivePlayerFields() {
+        return this.game.getInactivePlayerFields();
+    }
+
 }
