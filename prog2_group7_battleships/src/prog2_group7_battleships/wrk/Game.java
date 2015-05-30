@@ -92,8 +92,10 @@ public class Game {
     public ReturnCode aiPlacement() {
         for (ShipType type : ShipType.values()) {
             ReturnCode placementCode = ReturnCode.INDEX_OUT_OF_BOUND;
-            Double xCoordinate = Math.random() * 10;
-            Double yCoordinate = Math.random() * 10;
+            Double xCoordinateDouble = Math.random() * 10;
+            Double yCoordinateDouble = Math.random() * 10;
+            int xCoordinate = xCoordinateDouble.intValue();
+            int yCoordinate = yCoordinateDouble.intValue();
             Orientation orientation;
             if (Math.random() % 2 == 0) {
                 orientation = Orientation.HORIZONTAL;
@@ -103,34 +105,33 @@ public class Game {
             while (placementCode != ReturnCode.PLACED_SUCCESSFULLY) {
                 switch (placementCode) {
                     case INDEX_OUT_OF_BOUND:
-                        // todo: replace fix 10 by board length
                         if (orientation == Orientation.HORIZONTAL) {
-                            if (xCoordinate + type.getLength() > 9) {
-                                xCoordinate = 9.0 - type.getLength();
+                            if (xCoordinate + type.getLength() > Board.BOARD_LENGTH - 1) {
+                                xCoordinate = Board.BOARD_LENGTH - 1 - type.getLength();
                             }
-                            if (yCoordinate > 9) {
-                                yCoordinate = 9.0;
+                            if (yCoordinate > Board.BOARD_LENGTH - 1) {
+                                yCoordinate = Board.BOARD_LENGTH - 1;
                             }
                         } else {
-                            if (yCoordinate + type.getLength() > 9) {
-                                yCoordinate = 9.0 - type.getLength();
+                            if (yCoordinate + type.getLength() > Board.BOARD_LENGTH - 1) {
+                                yCoordinate = Board.BOARD_LENGTH - 1 - type.getLength();
                             }
-                            if (xCoordinate > 9) {
-                                xCoordinate = 9.0;
+                            if (xCoordinate > Board.BOARD_LENGTH - 1) {
+                                xCoordinate = Board.BOARD_LENGTH - 1;
                             }
                         }
                         break;
                     case NOT_FREE:
                         if (orientation == Orientation.HORIZONTAL) {
-                            if (yCoordinate == 9) {
-                                yCoordinate = 0.0;
+                            if (yCoordinate == Board.BOARD_LENGTH - 1) {
+                                yCoordinate = 0;
                                 xCoordinate++;
                             } else {
                                 yCoordinate++;
                             }
                         } else {
-                            if (xCoordinate == 9) {
-                                xCoordinate = 0.0;
+                            if (xCoordinate == Board.BOARD_LENGTH - 1) {
+                                xCoordinate = 0;
                                 yCoordinate++;
                             } else {
                                 xCoordinate++;
@@ -138,7 +139,7 @@ public class Game {
                         }
                         break;
                 }
-                placementCode = this.player2.placeShip(orientation, type, xCoordinate.intValue(), yCoordinate.intValue());
+                placementCode = this.player2.placeShip(orientation, type, xCoordinate, yCoordinate);
             }
         }
         this.state = GameState.P1_SHOOTING;
@@ -260,9 +261,6 @@ public class Game {
                     this.shotType = AIShotType.DETERMINING_SHOT_1;
                 }
         }
-        System.out.println("Game AIShot Method:");
-        System.out.println("xCoordinate: " + xCoordinate);
-        System.out.println("yCoordinate: " + yCoordinate);
         switch (returnCode) {
             case SHIP_SUNK:
                 this.shotType = AIShotType.RANDOM_SHOT;
@@ -281,8 +279,34 @@ public class Game {
         return this.mode;
     }
 
-    public Player getPlayer1() {
-        return this.player1;
+    public Field[][] getActivePlayerFields() {
+        Field[][] fields = null;
+        switch (this.state) {
+            case P1_PLACEMENT:
+            case P1_SHOOTING:
+                fields = this.player1.getFields();
+                break;
+            case P2_PLACEMENT:
+            case P2_SHOOTING:
+                fields = this.player2.getFields();
+                break;
+        }
+        return fields;
+    }
+
+    public Field[][] getInactivePlayerFields() {
+        Field[][] fields = null;
+        switch (this.state) {
+            case P1_PLACEMENT:
+            case P1_SHOOTING:
+                fields = this.player2.getFields();
+                break;
+            case P2_PLACEMENT:
+            case P2_SHOOTING:
+                fields = this.player1.getFields();
+                break;
+        }
+        return fields;
     }
 
 }

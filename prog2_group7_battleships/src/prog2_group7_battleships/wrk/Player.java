@@ -75,8 +75,8 @@ public class Player {
         return hasUnsunkShips;
     }
 
-    public Board getBoard() {
-        return this.board;
+    public Field[][] getFields() {
+        return this.board.getFields();
     }
 
 }
