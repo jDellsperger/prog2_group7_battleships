@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import prog2_group7_battleships.GameLauncher;
 import prog2_group7_battleships.ctrl.Controller;
 
 public class GUIView implements Viewable {
@@ -24,7 +23,7 @@ public class GUIView implements Viewable {
     private void initBattleship() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GameLauncher.class.getResource("Battlefield.fxml"));
+            loader.setLocation(GUIView.class.getResource("Battlefield.fxml"));
             AnchorPane battleshipsOverview = (AnchorPane) loader.load();
 
             rootLayout.setCenter(battleshipsOverview);
@@ -41,7 +40,7 @@ public class GUIView implements Viewable {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GameLauncher.class.getResource("RootLayout.fxml"));
+            loader.setLocation(GUIView.class.getResource("RootLayout.fxml"));
             this.rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
@@ -50,7 +49,6 @@ public class GUIView implements Viewable {
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
