@@ -2,9 +2,6 @@ package prog2_group7_battleships.ihm;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -22,99 +19,123 @@ public class BattlefieldController {
 	
 	private GUIView view;
 	
-	@FXML
-	private ComboBox shipTypeSelectionBox;
-	
-	@FXML
-	private RadioButton horizonalRadio;
-	@FXML
-	private RadioButton verticalRadio;
-	
-	private ToggleGroup orientationRadioGroup;
-	
-	
-	public void initialize() {
-		this.orientationRadioGroup = new ToggleGroup();
-	}
-	
 	public void setView (GUIView view) {
 		this.view = view;
 	}
 	
-	
-	public void fillFields(Field[][] boardFields) {
-		
-        Rectangle rectField;
-
+	public void fillFields(Field[][] playerFields) {
         Field tempField;
         Ship tempShip;
         
 
         for (int x = 0; x < Board.BOARD_LENGTH; x++) {
             for (int y = 0; y < Board.BOARD_LENGTH; y++) {
-                tempField = boardFields[x][y];
+            	final Rectangle rectangleField;
+            	tempField = playerFields[x][y];
                 tempShip = tempField.getShip();
-                rectField = new Rectangle();
+                rectangleField = new Rectangle();
 
-                rectField.setWidth(20.0);
-                rectField.setHeight(20.0);
-                rectField.setFill(Color.AQUA);
-                rectField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                rectangleField.setWidth(20.0);
+                rectangleField.setHeight(20.0);
+                rectangleField.setFill(Color.AQUA);
+                
                 
 
                 if (tempField.isShotAt()) {
                     if (tempShip == null) {
-                        rectField.setFill(Color.DARKBLUE);
+                        rectangleField.setFill(Color.DARKBLUE);
                     } else {
-                        rectField.setFill(Color.RED);
+                        rectangleField.setFill(Color.RED);
                     }
                 } else {
                     if (tempShip != null) {
                         switch (tempShip.getType()) {
                             case CARRIER:
-                                rectField.setFill(Color.BLACK);
+                                rectangleField.setFill(Color.BLACK);
                                 break;
                             case BATTLESHIP:
-                                rectField.setFill(Color.DARKSLATEGRAY);
+                                rectangleField.setFill(Color.DARKSLATEGRAY);
                                 break;
                             case SUBMARINE:
-                                rectField.setFill(Color.DARKGREY);
+                                rectangleField.setFill(Color.DARKGREY);
                                 break;
                             case DESTROYER:
-                                rectField.setFill(Color.GREY);
+                                rectangleField.setFill(Color.GREY);
                                 break;
                             case BOAT:
-                                rectField.setFill(Color.LIGHTGRAY);
+                                rectangleField.setFill(Color.LIGHTGRAY);
                                 break;
                         }
                     }
 
                 }
-                rectField.setVisible(true);
-                this.gridPlayer.add(rectField, y, x);
+                rectangleField.setVisible(true);
+                this.gridPlayer.add(rectangleField, y, x);
                 
                 EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
         			@Override
         			public void handle(MouseEvent event) {
-        				int x = GridPane.getColumnIndex(rectField);
-        				int y = GridPane.getRowIndex(rectField);
+        				int x = GridPane.getColumnIndex(rectangleField);
+        				int y = GridPane.getRowIndex(rectangleField);
+        				
         				handlePlaceShip(x,y);
+        				
+        				
         			}
         		};
+                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
         }
 	}
-
+	
 	public void fillFields(Field[][] playerFields, Field[][] opponentFields) {
+		fillFields(playerFields);
 		
-	}
+		Field tempField;
+        Ship tempShip;
+		
+		for (int x = 0; x < Board.BOARD_LENGTH; x++) {
+            for (int y = 0; y < Board.BOARD_LENGTH; y++) {
+            	final Rectangle rectangleField;
+            	tempField = opponentFields[x][y];
+                tempShip = tempField.getShip();
+                rectangleField = new Rectangle();
 
+                rectangleField.setWidth(20.0);
+                rectangleField.setHeight(20.0);
+                rectangleField.setFill(Color.AQUA);
+
+                if (tempField.isShotAt()) {
+                    if (tempShip == null) {
+                        rectangleField.setFill(Color.DARKBLUE);
+                    } else {
+                        rectangleField.setFill(Color.RED);
+                    }
+                }
+                
+                rectangleField.setVisible(true);
+                this.gridPlayer.add(rectangleField, y, x);
+                
+                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+        			@Override
+        			public void handle(MouseEvent event) {
+        				int x = GridPane.getColumnIndex(rectangleField);
+        				int y = GridPane.getRowIndex(rectangleField);
+        				handleShootShip(x,y);
+        			}
+        		};
+        		
+                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+            }
+		}
+	}
+	
 	public void handlePlaceShip(int x, int y) {
 		this.view.placeShip(x, y);
 		
 	}
 	
-	public void handleShootShip() {
-		this.view.shootShip();
+	public void handleShootShip(int x, int y) {
+		this.view.shootShip(x, y);
 	}
 }
