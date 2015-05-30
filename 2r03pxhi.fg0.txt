@@ -1,0 +1,4 @@
+﻿Merge branch 'pr/1'
+
+Conflicts:
+	prog2_group7_battleships/src/prog2_group7_battleships/GameLauncher.java

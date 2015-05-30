@@ -8,8 +8,8 @@ import prog2_group7_battleships.enums.ShipType;
 
 public class ConsoleView implements Viewable {
 
-    Controller ctrl;
-    Scanner scanner;
+    private Controller ctrl;
+    private Scanner scanner;
 
     public ConsoleView() {
         this.scanner = new Scanner(System.in);

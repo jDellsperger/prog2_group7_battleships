@@ -7,7 +7,7 @@ import prog2_group7_battleships.enums.ReturnCode;
 public class Board {
 
     private final Field[][] fields;
-    private final int BOARD_LENGTH = 10;
+    public final static int BOARD_LENGTH = 10;
 
     public Board() {
         this.fields = new Field[BOARD_LENGTH][BOARD_LENGTH];
@@ -102,6 +102,10 @@ public class Board {
             returnCode = ReturnCode.INDEX_OUT_OF_BOUND;
         }
         return returnCode;
+    }
+
+    public Field[][] getFields() {
+        return this.fields;
     }
 
 }
