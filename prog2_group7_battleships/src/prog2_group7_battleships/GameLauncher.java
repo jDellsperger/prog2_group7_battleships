@@ -3,7 +3,7 @@ package prog2_group7_battleships;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import prog2_group7_battleships.ctrl.Controller;
-import prog2_group7_battleships.ihm.View;
+import prog2_group7_battleships.ihm.ConsoleView;
 import prog2_group7_battleships.wrk.Game;
 
 public class GameLauncher extends Application {
@@ -18,7 +18,7 @@ public class GameLauncher extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Game game = new Game();
-        View view = new View();
+        ConsoleView view = new ConsoleView();
         Controller ctrl = new Controller(view, game);
         view.setController(ctrl);
 

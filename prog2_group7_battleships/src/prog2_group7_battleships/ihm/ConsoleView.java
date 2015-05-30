@@ -6,16 +6,21 @@ import prog2_group7_battleships.enums.GameMode;
 import prog2_group7_battleships.enums.Orientation;
 import prog2_group7_battleships.enums.ShipType;
 
-public class View {
+public class ConsoleView implements Viewable {
 
     Controller ctrl;
     Scanner scanner;
 
-    public void setController(Controller ctrl) {
-        this.ctrl = ctrl;
+    public ConsoleView() {
         this.scanner = new Scanner(System.in);
     }
 
+    @Override
+    public void setController(Controller ctrl) {
+        this.ctrl = ctrl;
+    }
+
+    @Override
     public void queryPlacement() {
         Orientation orientation = null;
         ShipType type = null;
@@ -86,10 +91,12 @@ public class View {
         this.ctrl.placeShip(orientation, type, xCoordinate, yCoordinate);
     }
 
+    @Override
     public void displayMessage(String message) {
         System.out.println(message);
     }
 
+    @Override
     public void queryMode() {
         GameMode mode = null;
         while (null == mode) {
@@ -108,6 +115,7 @@ public class View {
         this.ctrl.setGameMode(mode);
     }
 
+    @Override
     public void queryShooting() {
         int xCoordinate = -1;
         int yCoordinate = -1;
