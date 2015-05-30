@@ -1,7 +1,6 @@
 package prog2_group7_battleships.ctrl;
 
 import prog2_group7_battleships.enums.GameMode;
-import prog2_group7_battleships.ihm.ConsoleView;
 import prog2_group7_battleships.wrk.Game;
 import prog2_group7_battleships.enums.Orientation;
 import prog2_group7_battleships.enums.ShipType;
@@ -12,7 +11,7 @@ public class Controller {
     private final Viewable view;
     private final Game game;
 
-    public Controller(ConsoleView view, Game game) {
+    public Controller(Viewable view, Game game) {
         this.view = view;
         this.game = game;
     }

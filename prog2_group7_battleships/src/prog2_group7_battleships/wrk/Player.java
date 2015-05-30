@@ -8,7 +8,7 @@ import prog2_group7_battleships.enums.ReturnCode;
 public class Player {
 
     private final ArrayList<Ship> ships;
-    private Board board;
+    private final Board board;
 
     public Player() {
         this.board = new Board();
@@ -73,6 +73,10 @@ public class Player {
             }
         }
         return hasUnsunkShips;
+    }
+
+    public Board getBoard() {
+        return this.board;
     }
 
 }

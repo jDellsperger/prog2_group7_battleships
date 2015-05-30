@@ -281,4 +281,8 @@ public class Game {
         return this.mode;
     }
 
+    public Player getPlayer1() {
+        return this.player1;
+    }
+
 }
