@@ -9,8 +9,8 @@ import prog2_group7_battleships.enums.ReturnCode;
 
 public class Game {
 
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private GameMode mode;
     private GameState state;
 
