@@ -5,6 +5,7 @@ import prog2_group7_battleships.wrk.Game;
 import prog2_group7_battleships.enums.Orientation;
 import prog2_group7_battleships.enums.ShipType;
 import prog2_group7_battleships.ihm.Viewable;
+import prog2_group7_battleships.wrk.Field;
 
 public class Controller {
 
@@ -72,6 +73,14 @@ public class Controller {
     public void shoot(int xCoordinate, int yCoordinate) {
         this.view.displayMessage(this.game.shoot(xCoordinate, yCoordinate).getMessage());
         this.stateSwitch();
+    }
+
+    public Field[][] getPlayer1Fields() {
+        return this.game.getPlayer1Fields();
+    }
+
+    public Field[][] getPlayer2Fields() {
+        return this.game.getPlayer2Fields();
     }
 
 }
