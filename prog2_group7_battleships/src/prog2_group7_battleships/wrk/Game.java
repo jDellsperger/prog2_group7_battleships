@@ -279,12 +279,34 @@ public class Game {
         return this.mode;
     }
 
-    public Field[][] getPlayer1Fields() {
-        return this.player1.getFields();
+    public Field[][] getActivePlayerFields() {
+        Field[][] fields = null;
+        switch (this.state) {
+            case P1_PLACEMENT:
+            case P1_SHOOTING:
+                fields = this.player1.getFields();
+                break;
+            case P2_PLACEMENT:
+            case P2_SHOOTING:
+                fields = this.player2.getFields();
+                break;
+        }
+        return fields;
     }
 
-    public Field[][] getPlayer2Fields() {
-        return this.player2.getFields();
+    public Field[][] getInactivePlayerFields() {
+        Field[][] fields = null;
+        switch (this.state) {
+            case P1_PLACEMENT:
+            case P1_SHOOTING:
+                fields = this.player2.getFields();
+                break;
+            case P2_PLACEMENT:
+            case P2_SHOOTING:
+                fields = this.player1.getFields();
+                break;
+        }
+        return fields;
     }
 
 }

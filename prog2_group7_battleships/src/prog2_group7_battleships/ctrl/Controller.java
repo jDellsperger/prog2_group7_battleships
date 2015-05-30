@@ -75,12 +75,12 @@ public class Controller {
         this.stateSwitch();
     }
 
-    public Field[][] getPlayer1Fields() {
-        return this.game.getPlayer1Fields();
+    public Field[][] getActivePlayerFields() {
+        return this.game.getActivePlayerFields();
     }
 
-    public Field[][] getPlayer2Fields() {
-        return this.game.getPlayer2Fields();
+    public Field[][] getInactivePlayerFields() {
+        return this.game.getInactivePlayerFields();
     }
 
 }
