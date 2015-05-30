@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prog2_group7_battleships.ihm.ModeController">
+   <children>
+      <Button fx:id="singlePlayer" layoutX="301.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleSinglePlayerMode" prefHeight="40.0" prefWidth="200.0" text="SinglePlayer">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="multiPlayer" layoutX="301.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleMultiPlayerMode" prefHeight="40.0" prefWidth="200.0" text="MultiPlayer">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="259.0" layoutY="110.0" text="Select Game Mode">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
