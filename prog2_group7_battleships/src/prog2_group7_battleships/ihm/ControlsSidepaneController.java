@@ -38,7 +38,7 @@ public class ControlsSidepaneController {
 	 * @return
 	 */
 	public ShipType getAndResetShipType() {
-		// TODO
+		// TODO update the available ship types and set'em again
 		return null;
 	}
 }

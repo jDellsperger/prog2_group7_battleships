@@ -12,34 +12,23 @@ import prog2_group7_battleships.enums.GameState;
 
 public class GUIView implements Viewable {
 
+	private Controller ctrl;
     private final Stage primaryStage;
     private BorderPane rootLayout;
+    private AnchorPane battlefieldLayout;
+    
+    private RootLayoutController rootLayoutController;
+    private ModeController modeSelectionController;
     private BattlefieldController bfCtrl;
-    private Controller ctrl;
+    private ControlsSidepaneController controlsSidepaneCtrl;
+    private StatusSidepaneController statusSidepaneCtrl;
 
     public GUIView(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.initRootLayout();
-        this.initBattlefield();
+        this.initBattlefieldLayout();
     }
-
     
-    private void initBattlefield() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GUIView.class.getResource("Battlefield.fxml"));
-            AnchorPane battleshipsOverview = (AnchorPane) loader.load();
-
-            rootLayout.setCenter(battleshipsOverview);
-
-            // Give the controller access to the main app.
-            this.bfCtrl = loader.getController();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -50,12 +39,77 @@ public class GUIView implements Viewable {
             // Show the scene containing the root layout.
             Scene scene = new Scene(this.rootLayout);
             primaryStage.setScene(scene);
+            
+            this.rootLayoutController = loader.getController();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void initModeLayout() {
+    	try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("Mode.fxml"));
+            AnchorPane modeLayout = (AnchorPane) loader.load();
+
+            this.rootLayout.setCenter(modeLayout);
+
+            // Give the controller access to the main app.
+            this.modeSelectionController = loader.getController();
+            this.modeSelectionController.setView(this);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void initBattlefieldLayout() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("Battlefield.fxml"));
+            this.battlefieldLayout = (AnchorPane) loader.load();
+
+            this.rootLayout.setCenter(this.battlefieldLayout);
+
+            this.bfCtrl = loader.getController();
+            this.bfCtrl.setView(this);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void initControlsSidepaneLayout() {
+    	try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("ControlsSidepane.fxml"));
+            AnchorPane controlsSidepaneLayout = (AnchorPane) loader.load();
+
+            this.bfCtrl.setSidepane(controlsSidepaneLayout);
+                        
+            this.controlsSidepaneCtrl = loader.getController();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void initStatusSidepaneLayout() {
+    	try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("StatusSidepane.fxml"));
+            AnchorPane statusSidepaneLayout = (AnchorPane) loader.load();
+
+            this.bfCtrl.setSidepane(statusSidepaneLayout);
+
+            this.statusSidepaneCtrl = loader.getController();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public void setController(Controller ctrl) {
         this.ctrl = ctrl;
@@ -63,39 +117,56 @@ public class GUIView implements Viewable {
 
     @Override
     public void queryPlacement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.initBattlefieldLayout();
+        this.initControlsSidepaneLayout();
     }
 
     @Override
     public void displayMessage(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.rootLayoutController.setStatusMessage(message);
     }
 
     @Override
     public void queryMode() {
-        primaryStage.show();
+    	this.initModeLayout();
+        this.primaryStage.show();
     }
 
-    public void setMode(GameMode mode) {
-    	this.ctrl.setGameMode(mode);
-    }
-    
     @Override
     public void queryShooting() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.initStatusSidepaneLayout();
     }
 
 	@Override
 	public void updateView() {
-		this.bfCtrl.fillFields();
+		switch (this.ctrl.getGameState()) {
+		case P1_PLACEMENT:
+		case P2_PLACEMENT:
+			this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields());
+			break;
+		case P1_SHOOTING:
+		case P2_SHOOTING:
+			this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields(), this.ctrl.getInactivePlayerFields());
+			break;
+		default:
+			break;
+		}
+		
 	}
 
+	public void setMode(GameMode mode) {
+    	this.ctrl.setGameMode(mode);
+    }
 	
-	public void shootShip(int xCoordinate, int yCoordinate ) {
+	public void shootShip(int xCoordinate, int yCoordinate) {
 		switch (this.ctrl.getGameState()) {
-		case P1_SHOOTING: 
+		case P1_SHOOTING:
 		case P2_SHOOTING:
-			this.ctrl.shoot(xCoordinate, yCoordinate);		}
+			this.ctrl.shoot(xCoordinate, yCoordinate);
+			break;
+		default:
+			break;
+		}
 	}
 
 
@@ -103,7 +174,11 @@ public class GUIView implements Viewable {
 		switch (this.ctrl.getGameState()) {
 		case P1_PLACEMENT: 
 		case P2_PLACEMENT:
+			//TODO
 			//this.ctrl.placeShip(orientation, type, xCoordinate, yCoordinate);
+			break;
+		default:
+			break;
 		}
 	}
 }

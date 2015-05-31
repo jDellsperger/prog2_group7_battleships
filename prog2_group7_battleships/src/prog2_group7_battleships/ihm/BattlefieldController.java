@@ -3,6 +3,7 @@ package prog2_group7_battleships.ihm;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -19,7 +20,10 @@ public class BattlefieldController {
 	
 	private GUIView view;
 	
-	public void setView (GUIView view) {
+	@FXML
+	private AnchorPane sidePane;
+	
+	public void setView(GUIView view) {
 		this.view = view;
 	}
 	
@@ -72,7 +76,7 @@ public class BattlefieldController {
                 rectangleField.setVisible(true);
                 this.gridPlayer.add(rectangleField, y, x);
                 
-                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+                /*EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
         			@Override
         			public void handle(MouseEvent event) {
         				int x = GridPane.getColumnIndex(rectangleField);
@@ -83,7 +87,7 @@ public class BattlefieldController {
         				
         			}
         		};
-                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);*/
             }
         }
 	}
@@ -116,7 +120,7 @@ public class BattlefieldController {
                 rectangleField.setVisible(true);
                 this.gridPlayer.add(rectangleField, y, x);
                 
-                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+                /*EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
         			@Override
         			public void handle(MouseEvent event) {
         				int x = GridPane.getColumnIndex(rectangleField);
@@ -125,7 +129,7 @@ public class BattlefieldController {
         			}
         		};
         		
-                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);*/
             }
 		}
 	}
@@ -137,5 +141,14 @@ public class BattlefieldController {
 	
 	public void handleShootShip(int x, int y) {
 		this.view.shootShip(x, y);
+	}
+	
+	public AnchorPane getSidepane() {
+		return this.sidePane;
+	}
+
+	public void setSidepane(AnchorPane sidePane) {
+		this.sidePane = sidePane;
+		
 	}
 }
