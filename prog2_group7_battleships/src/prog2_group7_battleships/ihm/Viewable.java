@@ -13,7 +13,7 @@ public interface Viewable {
     void queryMode();
 
     void queryShooting();
-    
+
     void updateView();
 
 }

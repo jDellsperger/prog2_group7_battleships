@@ -1,6 +1,7 @@
 package prog2_group7_battleships.ctrl;
 
 import prog2_group7_battleships.enums.GameMode;
+import prog2_group7_battleships.enums.GameState;
 import prog2_group7_battleships.wrk.Game;
 import prog2_group7_battleships.enums.Orientation;
 import prog2_group7_battleships.enums.ShipType;
@@ -81,6 +82,10 @@ public class Controller {
 
     public Field[][] getInactivePlayerFields() {
         return this.game.getInactivePlayerFields();
+    }
+
+    public GameState getGameState() {
+        return this.game.getGameState();
     }
 
 }
