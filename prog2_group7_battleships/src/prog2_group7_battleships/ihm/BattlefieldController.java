@@ -76,7 +76,7 @@ public class BattlefieldController {
                 rectangleField.setVisible(true);
                 this.gridPlayer.add(rectangleField, y, x);
                 
-                /*EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
         			@Override
         			public void handle(MouseEvent event) {
         				int x = GridPane.getColumnIndex(rectangleField);
@@ -87,7 +87,7 @@ public class BattlefieldController {
         				
         			}
         		};
-                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);*/
+                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
         }
 	}
@@ -118,9 +118,9 @@ public class BattlefieldController {
                 }
                 
                 rectangleField.setVisible(true);
-                this.gridPlayer.add(rectangleField, y, x);
+                this.gridOpponent.add(rectangleField, y, x);
                 
-                /*EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
         			@Override
         			public void handle(MouseEvent event) {
         				int x = GridPane.getColumnIndex(rectangleField);
@@ -129,7 +129,7 @@ public class BattlefieldController {
         			}
         		};
         		
-                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);*/
+                rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
 		}
 	}
@@ -149,6 +149,7 @@ public class BattlefieldController {
 
 	public void setSidepane(AnchorPane sidePane) {
 		this.sidePane = sidePane;
+		this.sidePane.setVisible(true);
 		
 	}
 }

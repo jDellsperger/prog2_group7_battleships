@@ -1,15 +1,15 @@
 package prog2_group7_battleships.ihm;
 
-import prog2_group7_battleships.enums.Orientation;
-import prog2_group7_battleships.enums.ShipType;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import prog2_group7_battleships.enums.Orientation;
+import prog2_group7_battleships.enums.ShipType;
 
 public class ControlsSidepaneController {
 	@FXML
-	private ComboBox shipTypeSelectionBox;
+	private ChoiceBox shipTypeSelectionBox;
 	
 	@FXML
 	private RadioButton horizonalRadio;

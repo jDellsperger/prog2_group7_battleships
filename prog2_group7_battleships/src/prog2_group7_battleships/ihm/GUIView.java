@@ -4,11 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import prog2_group7_battleships.ctrl.Controller;
 import prog2_group7_battleships.enums.GameMode;
-import prog2_group7_battleships.enums.GameState;
+import prog2_group7_battleships.wrk.Board;
 
 public class GUIView implements Viewable {
 
@@ -20,7 +19,7 @@ public class GUIView implements Viewable {
     private RootLayoutController rootLayoutController;
     private ModeController modeSelectionController;
     private BattlefieldController bfCtrl;
-    private ControlsSidepaneController controlsSidepaneCtrl;
+    private ControlsSidepaneController controlsSidepaneController;
     private StatusSidepaneController statusSidepaneCtrl;
 
     public GUIView(Stage primaryStage) {
@@ -84,11 +83,12 @@ public class GUIView implements Viewable {
     	try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GUIView.class.getResource("ControlsSidepane.fxml"));
+            this.controlsSidepaneController = loader.getController();
             AnchorPane controlsSidepaneLayout = (AnchorPane) loader.load();
 
             this.bfCtrl.setSidepane(controlsSidepaneLayout);
                         
-            this.controlsSidepaneCtrl = loader.getController();
+            
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,6 +119,8 @@ public class GUIView implements Viewable {
     public void queryPlacement() {
         this.initBattlefieldLayout();
         this.initControlsSidepaneLayout();
+        Board tempBoard = new Board(); // Create a empty board
+        this.bfCtrl.fillFields(tempBoard.getFields(), tempBoard.getFields());
     }
 
     @Override
