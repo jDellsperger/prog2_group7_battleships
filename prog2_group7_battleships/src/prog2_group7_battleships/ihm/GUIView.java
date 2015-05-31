@@ -10,16 +10,19 @@ import prog2_group7_battleships.enums.GameMode;
 
 public class GUIView implements Viewable {
 
+    private Controller ctrl;
     private final Stage primaryStage;
     private BorderPane rootLayout;
     private AnchorPane modeSelect;
     private AnchorPane battlefield;
     private AnchorPane placementControls;
+    private AnchorPane statusSidepane;
 
     private BattlefieldController bfCtrl;
-    private ModeController modeCtrl;
+    private ModeController modeSelectionCtrl;
     private ControlsSidepaneController placementControlsCtrl;
-    private Controller ctrl;
+    private RootLayoutController rootLayoutController;
+    private StatusSidepaneController statusSidepaneCtrl;
 
     public GUIView(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -34,8 +37,8 @@ public class GUIView implements Viewable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GUIView.class.getResource("Mode.fxml"));
             this.modeSelect = (AnchorPane) loader.load();
-            this.modeCtrl = loader.getController();
-            this.modeCtrl.setView(this);
+            this.modeSelectionCtrl = loader.getController();
+            this.modeSelectionCtrl.setView(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,17 +56,6 @@ public class GUIView implements Viewable {
         }
     }
 
-    private void initPlacementControls() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GUIView.class.getResource("ControlsSidePane.fxml"));
-            this.placementControls = (AnchorPane) loader.load();
-            this.placementControlsCtrl = loader.getController();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -75,6 +67,30 @@ public class GUIView implements Viewable {
             Scene scene = new Scene(this.rootLayout);
             primaryStage.setScene(scene);
 
+            this.rootLayoutController = loader.getController();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initPlacementControls() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("ControlsSidepane.fxml"));
+            this.placementControls = (AnchorPane) loader.load();
+            this.placementControlsCtrl = loader.getController();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initStatusSidepaneLayout() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("StatusSidepane.fxml"));
+            this.statusSidepane = (AnchorPane) loader.load();
+            this.statusSidepaneCtrl = loader.getController();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,7 +110,7 @@ public class GUIView implements Viewable {
 
     @Override
     public void displayMessage(String message) {
-        System.out.println(message);
+        this.rootLayoutController.setStatusMessage(message);
     }
 
     @Override
@@ -109,7 +125,7 @@ public class GUIView implements Viewable {
 
     @Override
     public void queryShooting() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.initStatusSidepaneLayout();
     }
 
     @Override
@@ -137,8 +153,8 @@ public class GUIView implements Viewable {
         switch (this.ctrl.getGameState()) {
             case P1_PLACEMENT:
             case P2_PLACEMENT:
-                // todo: replace fix orientation and type
                 this.ctrl.placeShip(this.placementControlsCtrl.getOrientation(), this.placementControlsCtrl.getAndResetShipType(), x, y);
         }
     }
+
 }

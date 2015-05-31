@@ -3,6 +3,7 @@ package prog2_group7_battleships.ihm;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +19,9 @@ public class BattlefieldController {
     private GridPane gridOpponent;
 
     private GUIView view;
+
+    @FXML
+    private AnchorPane sidePane;
 
     public void setView(GUIView view) {
         this.view = view;
@@ -131,5 +135,14 @@ public class BattlefieldController {
 
     public void handleShootShip(int x, int y) {
         this.view.shootShip(x, y);
+    }
+
+    public AnchorPane getSidepane() {
+        return this.sidePane;
+    }
+
+    public void setSidepane(AnchorPane sidePane) {
+        this.sidePane = sidePane;
+
     }
 }
