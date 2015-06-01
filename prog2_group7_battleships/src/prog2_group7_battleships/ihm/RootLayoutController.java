@@ -29,7 +29,7 @@ public class RootLayoutController {
     public void handleExit() {
         System.exit(0);
     }
-
+    
 	public void setStatusMessage(String message) {
 		this.statusMessage.setText(message);
 	}

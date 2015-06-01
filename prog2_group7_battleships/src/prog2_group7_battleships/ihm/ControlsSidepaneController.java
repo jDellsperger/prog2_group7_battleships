@@ -23,6 +23,7 @@ public class ControlsSidepaneController {
     public void initialize() {
         this.orientationRadioGroup = new ToggleGroup();
         this.orientationRadioGroup.getToggles().addAll(this.horizonalRadio, this.verticalRadio);
+        this.orientationRadioGroup.selectToggle(this.verticalRadio);
 
         this.shipTypeSelectionBox.getItems().addAll(Arrays.asList(ShipType.values()));
     }
