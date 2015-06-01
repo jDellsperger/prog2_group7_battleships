@@ -41,6 +41,7 @@ public class BattlefieldController {
                 rectangleField.setWidth(20.0);
                 rectangleField.setHeight(20.0);
                 rectangleField.setFill(Color.AQUA);
+                rectangleField.setStroke(Color.BLACK);
 
                 if (tempField.isShotAt()) {
                     if (tempShip == null) {
@@ -71,7 +72,7 @@ public class BattlefieldController {
 
                 }
                 rectangleField.setVisible(true);
-                this.gridPlayer.add(rectangleField, y, x);
+                this.gridPlayer.add(rectangleField, x, y);
 
                 EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
                     @Override
@@ -103,6 +104,7 @@ public class BattlefieldController {
                 rectangleField.setWidth(20.0);
                 rectangleField.setHeight(20.0);
                 rectangleField.setFill(Color.AQUA);
+                rectangleField.setStroke(Color.BLACK);
 
                 if (tempField.isShotAt()) {
                     if (tempShip == null) {
@@ -113,7 +115,7 @@ public class BattlefieldController {
                 }
 
                 rectangleField.setVisible(true);
-                this.gridOpponent.add(rectangleField, y, x);
+                this.gridOpponent.add(rectangleField, x, y);
 
                 EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
                     @Override

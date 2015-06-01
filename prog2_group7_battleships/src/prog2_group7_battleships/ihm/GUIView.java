@@ -125,7 +125,7 @@ public class GUIView implements Viewable {
 
     @Override
     public void queryShooting() {
-        this.initStatusSidepaneLayout();
+        this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields(), this.ctrl.getInactivePlayerFields());
     }
 
     @Override
