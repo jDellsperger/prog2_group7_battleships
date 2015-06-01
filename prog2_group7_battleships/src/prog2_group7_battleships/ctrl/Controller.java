@@ -84,10 +84,8 @@ public class Controller {
         return this.game.getInactivePlayerFields();
     }
 
-	public GameState getGameState() {
-		return this.game.getGameState();
-	}
-    
-    
+    public GameState getGameState() {
+        return this.game.getGameState();
+    }
 
 }

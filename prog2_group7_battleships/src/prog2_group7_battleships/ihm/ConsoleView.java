@@ -147,10 +147,10 @@ public class ConsoleView implements Viewable {
         this.ctrl.shoot(xCoordinate, yCoordinate);
     }
 
-	@Override
-	public void updateView() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void updateView() {
+        // TODO Auto-generated method stub
+
+    }
 
 }
