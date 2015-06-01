@@ -113,7 +113,7 @@ public class BattlefieldController {
                 }
 
                 rectangleField.setVisible(true);
-                this.gridPlayer.add(rectangleField, y, x);
+                this.gridOpponent.add(rectangleField, y, x);
 
                 EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
                     @Override
