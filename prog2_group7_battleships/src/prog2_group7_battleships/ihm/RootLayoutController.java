@@ -12,7 +12,8 @@ public class RootLayoutController {
 	
 	private GUIView view;
 	
-	public void initialize() {
+	@FXML
+	private void initialize() {
 	}
 	
 	public void setView(GUIView view) {

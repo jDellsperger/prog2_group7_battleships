@@ -20,7 +20,8 @@ public class ControlsSidepaneController {
 
     private ToggleGroup orientationRadioGroup;
 
-    public void initialize() {
+    @FXML
+    private void initialize() {
         this.orientationRadioGroup = new ToggleGroup();
         this.orientationRadioGroup.getToggles().addAll(this.horizonalRadio, this.verticalRadio);
         this.orientationRadioGroup.selectToggle(this.verticalRadio);
