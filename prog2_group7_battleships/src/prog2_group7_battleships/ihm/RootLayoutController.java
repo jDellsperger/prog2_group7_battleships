@@ -8,11 +8,20 @@ import javafx.scene.control.Label;
 public class RootLayoutController {
 
 	@FXML
-	private final Label statusMessage = new Label();
+	private Label statusMessage;
+	
+	private GUIView view;
+	
+	public void initialize() {
+	}
+	
+	public void setView(GUIView view) {
+		this.view = view;
+	}
 	
     @FXML
     public void handleNew() {
-        //TODO start new game
+    	this.view.startNewGame();
     }
 
     @FXML

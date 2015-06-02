@@ -15,5 +15,7 @@ public interface Viewable {
     void queryShooting();
 
     void updateView();
-
+    
+    void displayGameOver();
+    
 }

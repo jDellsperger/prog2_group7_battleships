@@ -68,6 +68,7 @@ public class GUIView implements Viewable {
             primaryStage.setScene(scene);
 
             this.rootLayoutController = loader.getController();
+            this.rootLayoutController.setView(this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,5 +157,14 @@ public class GUIView implements Viewable {
                 this.ctrl.placeShip(this.placementControlsCtrl.getOrientation(), this.placementControlsCtrl.getAndResetShipType(), x, y);
         }
     }
+
+	@Override
+	public void displayGameOver() {
+		
+	}
+	
+	public void startNewGame() {
+		initMode();
+	}
 
 }

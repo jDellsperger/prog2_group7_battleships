@@ -153,4 +153,9 @@ public class ConsoleView implements Viewable {
 
     }
 
+	@Override
+	public void displayGameOver() {
+		// TODO Auto-generated method stub
+	}
+
 }
