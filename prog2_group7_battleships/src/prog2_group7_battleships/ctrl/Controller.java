@@ -64,7 +64,7 @@ public class Controller {
                 break;
             case GAME_OVER:
                 this.view.displayMessage("The game is over.");
-                System.exit(0);
+                this.view.displayGameOver();
                 break;
             default:
                 this.view.displayMessage("Invalid state");
