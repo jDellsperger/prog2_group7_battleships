@@ -158,4 +158,10 @@ public class ConsoleView implements Viewable {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void switchUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -54,6 +54,7 @@ public class Controller {
                 break;
             case P2_SHOOTING:
                 if (this.game.getGameMode() == GameMode.MULTI) {
+                	this.view.switchUser();
                     this.view.displayMessage("Player 2 shooting");
                     this.view.queryShooting();
                 } else {

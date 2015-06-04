@@ -35,6 +35,7 @@ public class GUIView implements Viewable {
         this.initBattlefield();
         this.initPlacementControls();
         this.initStatusSidepaneLayout();
+        this.initSwitchPlayerLayout();
         this.initGameOverLayout();
     }
 
@@ -192,6 +193,16 @@ public class GUIView implements Viewable {
 	public void displayGameOver() {
 		this.rootLayout.getChildren().clear();
 		this.rootLayout.setCenter(this.gameOverLayout);
+	}
+	
+	@Override
+	public void switchUser() {
+		this.rootLayout.getChildren().clear();
+		this.rootLayout.setCenter(this.swtichPlayerLayout);
+		this.switchLayoutCtrl.waitForUserConfirmation();
+		this.rootLayout.getChildren().clear();
+		this.rootLayout.setCenter(this.battlefield);
+		this.rootLayout.setRight(this.statusSidepane);
 	}
 	
 	public void startNewGame() {
