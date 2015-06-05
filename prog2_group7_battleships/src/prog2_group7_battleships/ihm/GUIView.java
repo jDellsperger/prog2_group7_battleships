@@ -158,13 +158,13 @@ public class GUIView implements Viewable {
         }
     }
 
-	@Override
-	public void displayGameOver() {
-		
-	}
-	
-	public void startNewGame() {
-		initMode();
-	}
+    @Override
+    public void displayGameOver() {
+
+    }
+
+    public void startNewGame() {
+        this.ctrl.startNewGame();
+    }
 
 }

@@ -9,8 +9,8 @@ import prog2_group7_battleships.enums.ReturnCode;
 
 public class Game {
 
-    private final Player player1;
-    private final Player player2;
+    private Player player1;
+    private Player player2;
     private GameMode mode;
     private GameState state;
 
@@ -22,9 +22,9 @@ public class Game {
     private AIShotType shotType;
 
     public Game() {
-        state = GameState.MODE_SELECT;
-        player1 = new Player();
-        player2 = new Player();
+        this.state = GameState.MODE_SELECT;
+        this.player1 = new Player();
+        this.player2 = new Player();
         this.shotType = AIShotType.RANDOM_SHOT;
     }
 
@@ -97,6 +97,7 @@ public class Game {
             int xCoordinate = xCoordinateDouble.intValue();
             int yCoordinate = yCoordinateDouble.intValue();
             Orientation orientation;
+            // todo: find out why ai always places it's ships vertically
             if (Math.random() % 2 == 0) {
                 orientation = Orientation.HORIZONTAL;
             } else {

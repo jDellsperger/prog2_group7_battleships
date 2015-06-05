@@ -7,22 +7,18 @@ import javafx.scene.control.Label;
 
 public class RootLayoutController {
 
-	@FXML
-	private Label statusMessage;
-	
-	private GUIView view;
-	
-	@FXML
-	private void initialize() {
-	}
-	
-	public void setView(GUIView view) {
-		this.view = view;
-	}
-	
+    @FXML
+    private Label statusMessage;
+
+    private GUIView view;
+
+    public void setView(GUIView view) {
+        this.view = view;
+    }
+
     @FXML
     public void handleNew() {
-    	this.view.startNewGame();
+        this.view.startNewGame();
     }
 
     @FXML
@@ -39,9 +35,9 @@ public class RootLayoutController {
     public void handleExit() {
         System.exit(0);
     }
-    
-	public void setStatusMessage(String message) {
-		this.statusMessage.setText(message);
-	}
+
+    public void setStatusMessage(String message) {
+        this.statusMessage.setText(message);
+    }
 
 }

@@ -74,14 +74,10 @@ public class BattlefieldController {
                 rectangleField.setVisible(true);
                 this.gridPlayer.add(rectangleField, x, y);
 
-                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        int x = GridPane.getColumnIndex(rectangleField);
-                        int y = GridPane.getRowIndex(rectangleField);
-
-                        handlePlaceShip(x, y);
-                    }
+                EventHandler<MouseEvent> handler = (MouseEvent event) -> {
+                    int x1 = GridPane.getColumnIndex(rectangleField);
+                    int y1 = GridPane.getRowIndex(rectangleField);
+                    handlePlaceShip(x1, y1);
                 };
                 rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             }
@@ -117,13 +113,10 @@ public class BattlefieldController {
                 rectangleField.setVisible(true);
                 this.gridOpponent.add(rectangleField, x, y);
 
-                EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        int x = GridPane.getColumnIndex(rectangleField);
-                        int y = GridPane.getRowIndex(rectangleField);
-                        handleShootShip(x, y);
-                    }
+                EventHandler<MouseEvent> handler = (MouseEvent event) -> {
+                    int x1 = GridPane.getColumnIndex(rectangleField);
+                    int y1 = GridPane.getRowIndex(rectangleField);
+                    handleShootShip(x1, y1);
                 };
 
                 rectangleField.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);

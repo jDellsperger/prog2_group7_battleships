@@ -11,7 +11,7 @@ import prog2_group7_battleships.wrk.Game;
 public class Controller {
 
     private final Viewable view;
-    private final Game game;
+    private Game game;
 
     public Controller(Viewable view, Game game) {
         this.view = view;
@@ -19,7 +19,7 @@ public class Controller {
     }
 
     public void start() {
-        this.view.queryMode();
+        this.stateSwitch();
     }
 
     public void setGameMode(GameMode mode) {
@@ -34,6 +34,9 @@ public class Controller {
 
     private void stateSwitch() {
         switch (this.game.getGameState()) {
+            case MODE_SELECT:
+                this.view.queryMode();
+                break;
             case P1_PLACEMENT:
                 this.view.displayMessage("Player 1 ship placement");
                 this.view.queryPlacement();
@@ -86,6 +89,11 @@ public class Controller {
 
     public GameState getGameState() {
         return this.game.getGameState();
+    }
+
+    public void startNewGame() {
+        this.game = new Game();
+        this.stateSwitch();
     }
 
 }
