@@ -17,12 +17,16 @@ public class GUIView implements Viewable {
     private AnchorPane battlefield;
     private AnchorPane placementControls;
     private AnchorPane statusSidepane;
+    private AnchorPane swtichPlayerLayout;
+    private AnchorPane gameOverLayout;
 
     private BattlefieldController bfCtrl;
     private ModeController modeSelectionCtrl;
     private ControlsSidepaneController placementControlsCtrl;
     private RootLayoutController rootLayoutController;
     private StatusSidepaneController statusSidepaneCtrl;
+    private SwitchPlayerLayoutController switchLayoutCtrl;
+    private GameOverLayoutController GameOverCtrl;
 
     public GUIView(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -30,6 +34,9 @@ public class GUIView implements Viewable {
         this.initMode();
         this.initBattlefield();
         this.initPlacementControls();
+        this.initStatusSidepaneLayout();
+        this.initSwitchPlayerLayout();
+        this.initGameOverLayout();
     }
 
     private void initMode() {
@@ -55,7 +62,7 @@ public class GUIView implements Viewable {
             e.printStackTrace();
         }
     }
-
+    
     private void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -85,7 +92,7 @@ public class GUIView implements Viewable {
             e.printStackTrace();
         }
     }
-
+    
     private void initStatusSidepaneLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -97,6 +104,29 @@ public class GUIView implements Viewable {
         }
     }
 
+    private void initSwitchPlayerLayout() {
+    	try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("SwtichPlayerLayout.fxml"));
+            this.swtichPlayerLayout = (AnchorPane) loader.load();
+            this.switchLayoutCtrl = loader.getController();
+            this.switchLayoutCtrl.setView(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void initGameOverLayout() {
+    	try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUIView.class.getResource("GameOverLayout.fxml"));
+            this.gameOverLayout = (AnchorPane) loader.load();
+            this.GameOverCtrl = loader.getController();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public void setController(Controller ctrl) {
         this.ctrl = ctrl;
@@ -126,6 +156,7 @@ public class GUIView implements Viewable {
 
     @Override
     public void queryShooting() {
+    	this.rootLayout.setRight(this.statusSidepane);
         this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields(), this.ctrl.getInactivePlayerFields());
     }
 
@@ -160,7 +191,18 @@ public class GUIView implements Viewable {
 
 	@Override
 	public void displayGameOver() {
-		
+		this.rootLayout.getChildren().clear();
+		this.rootLayout.setCenter(this.gameOverLayout);
+	}
+	
+	@Override
+	public void switchUser() {
+		this.rootLayout.getChildren().clear();
+		this.rootLayout.setCenter(this.swtichPlayerLayout);
+		this.switchLayoutCtrl.waitForUserConfirmation();
+		this.rootLayout.getChildren().clear();
+		this.rootLayout.setCenter(this.battlefield);
+		this.rootLayout.setRight(this.statusSidepane);
 	}
 	
 	public void startNewGame() {

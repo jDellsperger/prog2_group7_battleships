@@ -54,6 +54,7 @@ public class Controller {
                 break;
             case P2_SHOOTING:
                 if (this.game.getGameMode() == GameMode.MULTI) {
+                	this.view.switchUser();
                     this.view.displayMessage("Player 2 shooting");
                     this.view.queryShooting();
                 } else {
@@ -64,7 +65,7 @@ public class Controller {
                 break;
             case GAME_OVER:
                 this.view.displayMessage("The game is over.");
-                System.exit(0);
+                this.view.displayGameOver();
                 break;
             default:
                 this.view.displayMessage("Invalid state");
