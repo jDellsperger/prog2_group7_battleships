@@ -17,7 +17,7 @@ public class GUIView implements Viewable {
     private AnchorPane battlefield;
     private AnchorPane placementControls;
     private AnchorPane statusSidepane;
-    private AnchorPane swtichPlayerLayout;
+    private AnchorPane switchPlayer;
     private AnchorPane gameOverLayout;
 
     private BattlefieldController bfCtrl;
@@ -26,7 +26,7 @@ public class GUIView implements Viewable {
     private RootLayoutController rootLayoutController;
     private StatusSidepaneController statusSidepaneCtrl;
     private SwitchPlayerLayoutController switchLayoutCtrl;
-    private GameOverLayoutController GameOverCtrl;
+    private GameOverLayoutController gameOverCtrl;
 
     public GUIView(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -107,8 +107,8 @@ public class GUIView implements Viewable {
     private void initSwitchPlayerLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GUIView.class.getResource("SwtichPlayerLayout.fxml"));
-            this.swtichPlayerLayout = (AnchorPane) loader.load();
+            loader.setLocation(GUIView.class.getResource("SwitchPlayerLayout.fxml"));
+            this.switchPlayer = (AnchorPane) loader.load();
             this.switchLayoutCtrl = loader.getController();
             this.switchLayoutCtrl.setView(this);
         } catch (Exception e) {
@@ -121,7 +121,8 @@ public class GUIView implements Viewable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GUIView.class.getResource("GameOverLayout.fxml"));
             this.gameOverLayout = (AnchorPane) loader.load();
-            this.GameOverCtrl = loader.getController();
+            this.gameOverCtrl = loader.getController();
+            this.gameOverCtrl.setView(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,6 +157,7 @@ public class GUIView implements Viewable {
 
     @Override
     public void queryShooting() {
+        this.rootLayout.setCenter(this.battlefield);
         this.rootLayout.setRight(this.statusSidepane);
         this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields(), this.ctrl.getInactivePlayerFields());
     }
@@ -200,13 +202,13 @@ public class GUIView implements Viewable {
     }
 
     @Override
-    public void switchUser() {
+    public void queryPlayerSwitch() {
         this.rootLayout.getChildren().clear();
-        this.rootLayout.setCenter(this.swtichPlayerLayout);
-        this.switchLayoutCtrl.waitForUserConfirmation();
-        this.rootLayout.getChildren().clear();
-        this.rootLayout.setCenter(this.battlefield);
-        this.rootLayout.setRight(this.statusSidepane);
+        this.rootLayout.setCenter(this.switchPlayer);
+    }
+
+    public void playerSwitched() {
+        this.ctrl.playerSwitched();
     }
 
 }

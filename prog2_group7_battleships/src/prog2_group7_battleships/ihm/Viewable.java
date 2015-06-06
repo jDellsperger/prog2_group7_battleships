@@ -14,10 +14,10 @@ public interface Viewable {
 
     void queryShooting();
 
-    void switchUser();
-    
+    void queryPlayerSwitch();
+
     void updateView();
-    
+
     void displayGameOver();
-    
+
 }

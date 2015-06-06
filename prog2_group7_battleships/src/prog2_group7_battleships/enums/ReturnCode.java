@@ -16,7 +16,7 @@ public enum ReturnCode {
     INVALID_GAMESTATE("The game is in an invalid state."), ALREADY_SHOT_AT("The targeted field has already been shot at."),
     SHIP_HIT("An enemy ship was hit!"), SHIP_SUNK("We sunk the enemy ship!"), MISSED("We missed..."),
     PLAYER_LOST("All ships have been sunk."), AI_PLACEMENT_SUCCEEDED("The AI placed its ships successfully."),
-    AI_PLACEMENT_FAILED("The AI could not find a free spot for its ships.");
+    AI_PLACEMENT_FAILED("The AI could not find a free spot for its ships."), PLAYER_DONE_WITH_PLACEMENT("The player placed all his ships.");
 
     private final String message;
 

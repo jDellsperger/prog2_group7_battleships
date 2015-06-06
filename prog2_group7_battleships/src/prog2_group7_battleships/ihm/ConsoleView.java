@@ -153,15 +153,14 @@ public class ConsoleView implements Viewable {
 
     }
 
-	@Override
-	public void displayGameOver() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void displayGameOver() {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void switchUser() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void queryPlayerSwitch() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

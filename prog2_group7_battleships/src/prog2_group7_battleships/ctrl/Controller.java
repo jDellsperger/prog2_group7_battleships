@@ -3,6 +3,7 @@ package prog2_group7_battleships.ctrl;
 import prog2_group7_battleships.enums.GameMode;
 import prog2_group7_battleships.enums.GameState;
 import prog2_group7_battleships.enums.Orientation;
+import prog2_group7_battleships.enums.ReturnCode;
 import prog2_group7_battleships.enums.ShipType;
 import prog2_group7_battleships.ihm.Viewable;
 import prog2_group7_battleships.wrk.Field;
@@ -24,11 +25,6 @@ public class Controller {
 
     public void setGameMode(GameMode mode) {
         this.game.setGameMode(mode);
-        this.stateSwitch();
-    }
-
-    public void placeShip(Orientation orientation, ShipType type, int xCoordinate, int yCoordinate) {
-        this.view.displayMessage(this.game.placeShip(orientation, type, xCoordinate, yCoordinate).getMessage());
         this.stateSwitch();
     }
 
@@ -57,7 +53,6 @@ public class Controller {
                 break;
             case P2_SHOOTING:
                 if (this.game.getGameMode() == GameMode.MULTI) {
-                	this.view.switchUser();
                     this.view.displayMessage("Player 2 shooting");
                     this.view.queryShooting();
                 } else {
@@ -75,9 +70,24 @@ public class Controller {
         }
     }
 
+    public void placeShip(Orientation orientation, ShipType type, int xCoordinate, int yCoordinate) {
+        ReturnCode returnCode = this.game.placeShip(orientation, type, xCoordinate, yCoordinate);
+        this.view.displayMessage(returnCode.getMessage());
+        if (this.game.getGameMode() == GameMode.MULTI && returnCode == ReturnCode.PLAYER_DONE_WITH_PLACEMENT) {
+            this.view.queryPlayerSwitch();
+        } else {
+            this.stateSwitch();
+        }
+    }
+
     public void shoot(int xCoordinate, int yCoordinate) {
-        this.view.displayMessage(this.game.shoot(xCoordinate, yCoordinate).getMessage());
-        this.stateSwitch();
+        ReturnCode returnCode = this.game.shoot(xCoordinate, yCoordinate);
+        this.view.displayMessage(returnCode.getMessage());
+        if (this.game.getGameMode() == GameMode.MULTI && returnCode == ReturnCode.MISSED) {
+            this.view.queryPlayerSwitch();
+        } else {
+            this.stateSwitch();
+        }
     }
 
     public Field[][] getActivePlayerFields() {
@@ -94,6 +104,10 @@ public class Controller {
 
     public void startNewGame() {
         this.game = new Game();
+        this.stateSwitch();
+    }
+
+    public void playerSwitched() {
         this.stateSwitch();
     }
 

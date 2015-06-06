@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prog2_group7_battleships.ihm.SwitchPlayerLayoutController">
-   <children>
-      <Button layoutX="327.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleConfirmation" text="I'm the other Player" />
-      <Label layoutX="272.0" layoutY="175.0" text="It's your opponent's turn. Switch Seats." />
-   </children>
+    <children>
+        <Button layoutX="327.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleConfirmation" text="I'm the other Player" />
+        <Label layoutX="272.0" layoutY="175.0" text="It's your opponent's turn. Switch Seats." />
+    </children>
 </AnchorPane>

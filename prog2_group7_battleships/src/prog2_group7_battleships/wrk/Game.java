@@ -35,12 +35,14 @@ public class Game {
                 returnCode = this.player1.placeShip(orientation, type, xCoordinate, yCoordinate);
                 if (this.player1.isDoneWithPlacement()) {
                     this.state = GameState.P2_PLACEMENT;
+                    returnCode = ReturnCode.PLAYER_DONE_WITH_PLACEMENT;
                 }
                 break;
             case P2_PLACEMENT:
                 returnCode = this.player2.placeShip(orientation, type, xCoordinate, yCoordinate);
                 if (this.player2.isDoneWithPlacement()) {
                     this.state = GameState.P1_SHOOTING;
+                    returnCode = ReturnCode.PLAYER_DONE_WITH_PLACEMENT;
                 }
                 break;
             default:
@@ -97,8 +99,8 @@ public class Game {
             int xCoordinate = xCoordinateDouble.intValue();
             int yCoordinate = yCoordinateDouble.intValue();
             Orientation orientation;
-            // todo: find out why ai always places it's ships vertically
-            if (Math.random() % 2 == 0) {
+            Double randomOrientation = Math.random() * 10;
+            if (randomOrientation.intValue() % 2 == 0) {
                 orientation = Orientation.HORIZONTAL;
             } else {
                 orientation = Orientation.VERTICAL;
