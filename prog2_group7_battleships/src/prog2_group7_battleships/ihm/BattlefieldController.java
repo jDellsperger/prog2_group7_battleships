@@ -2,6 +2,7 @@ package prog2_group7_battleships.ihm;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -17,6 +18,11 @@ public class BattlefieldController {
     private GridPane gridPlayer;
     @FXML
     private GridPane gridOpponent;
+    @FXML
+    private Label opponentGridLabel;
+
+    @FXML
+    private Label battlefieldTitle;
 
     private GUIView view;
 
@@ -30,6 +36,8 @@ public class BattlefieldController {
     public void fillFields(Field[][] playerFields) {
         Field tempField;
         Ship tempShip;
+        this.gridOpponent.setVisible(false);
+        this.opponentGridLabel.setVisible(false);
 
         for (int x = 0; x < Board.BOARD_LENGTH; x++) {
             for (int y = 0; y < Board.BOARD_LENGTH; y++) {
@@ -86,6 +94,8 @@ public class BattlefieldController {
 
     public void fillFields(Field[][] playerFields, Field[][] opponentFields) {
         fillFields(playerFields);
+        this.gridOpponent.setVisible(true);
+        this.opponentGridLabel.setVisible(true);
 
         Field tempField;
         Ship tempShip;
@@ -138,6 +148,9 @@ public class BattlefieldController {
 
     public void setSidepane(AnchorPane sidePane) {
         this.sidePane = sidePane;
+    }
 
+    public void setBattlefieldTitle(String message) {
+        this.battlefieldTitle.setText(message);
     }
 }

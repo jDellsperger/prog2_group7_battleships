@@ -8,6 +8,8 @@ public interface Viewable {
 
     void queryPlacement();
 
+    void displayTitle(String message);
+
     void displayMessage(String message);
 
     void queryMode();

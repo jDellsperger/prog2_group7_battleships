@@ -141,12 +141,19 @@ public class GUIView implements Viewable {
     }
 
     @Override
+    public void displayTitle(String message) {
+        this.bfCtrl.setBattlefieldTitle(message);
+    }
+
+    @Override
     public void displayMessage(String message) {
         this.rootLayoutController.setStatusMessage(message);
     }
 
     @Override
     public void queryMode() {
+        this.rootLayoutController.setStatusMessage("");
+        this.rootLayout.setRight(null);
         this.rootLayout.setCenter(this.modeSelect);
         this.primaryStage.show();
     }
@@ -197,13 +204,14 @@ public class GUIView implements Viewable {
 
     @Override
     public void displayGameOver() {
-        this.rootLayout.getChildren().clear();
+        this.rootLayout.setRight(null);
+        this.rootLayoutController.setStatusMessage("");
         this.rootLayout.setCenter(this.gameOverLayout);
     }
 
     @Override
     public void queryPlayerSwitch() {
-        this.rootLayout.getChildren().clear();
+        this.rootLayout.setRight(null);
         this.rootLayout.setCenter(this.switchPlayer);
     }
 
