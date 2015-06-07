@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -7,7 +8,81 @@
 
 <AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="prog2_group7_battleships.ihm.GameOverLayoutController">
     <children>
-        <Label layoutX="361.0" layoutY="108.0" text="GAME OVER" />
-        <Button layoutX="327.0" layoutY="212.0" mnemonicParsing="false" onAction="#startNewGame" text="Start new Game" />
+        <Label fx:id="gameOverTitle" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="20.0" >
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <Label layoutY="120.0" text="Player 1:" AnchorPane.leftAnchor="20.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" AnchorPane.topAnchor="140.0" text="Shots:" AnchorPane.leftAnchor="20.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="player1Shots" AnchorPane.topAnchor="140.0" AnchorPane.leftAnchor="100.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" AnchorPane.topAnchor="160.0" text="Hits:" AnchorPane.leftAnchor="20.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="player1Hits" AnchorPane.topAnchor="160.0" AnchorPane.leftAnchor="100.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" AnchorPane.topAnchor="180.0" text="Ratio:" AnchorPane.leftAnchor="20.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="player1Ratio" AnchorPane.topAnchor="180.0" AnchorPane.leftAnchor="100.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label layoutY="120.0" text="Player 2:" AnchorPane.leftAnchor="220.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" AnchorPane.topAnchor="140.0" text="Shots:" AnchorPane.leftAnchor="220.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="player2Shots" AnchorPane.topAnchor="140.0" AnchorPane.leftAnchor="300.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" AnchorPane.topAnchor="160.0" text="Hits:" AnchorPane.leftAnchor="220.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="player2Hits" AnchorPane.topAnchor="160.0" AnchorPane.leftAnchor="300.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" AnchorPane.topAnchor="180.0" text="Ratio:" AnchorPane.leftAnchor="220.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="player2Ratio" AnchorPane.topAnchor="180.0" AnchorPane.leftAnchor="300.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Button AnchorPane.topAnchor="220.0" AnchorPane.leftAnchor="20.0" mnemonicParsing="false" onAction="#startNewGame" text="Start new Game" />
     </children>
 </AnchorPane>

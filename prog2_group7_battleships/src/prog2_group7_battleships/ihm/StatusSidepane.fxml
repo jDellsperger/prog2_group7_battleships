@@ -8,11 +8,82 @@
 
 <AnchorPane prefHeight="448.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prog2_group7_battleships.ihm.StatusSidepaneController">
    <children>
-      <Label layoutX="82.0" layoutY="25.0" text="Status" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <Label layoutX="82.0" layoutY="25.0" text="Statistics" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="63.0" text="ToDo" AnchorPane.leftAnchor="20.0" />
+      <Label layoutX="20.0" layoutY="63.0" text="Player 1:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="83.0" text="Shots:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player1Shots" layoutX="100.0" layoutY="83.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="103.0" text="Hits:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player1Hits" layoutX="100.0" layoutY="103.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="123.0" text="Ratio:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player1Ratio" layoutX="100.0" layoutY="123.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="player1ShipList" layoutX="20.0" layoutY="153.0" AnchorPane.leftAnchor="20.0" />   
+      <Label layoutX="20.0" layoutY="263.0" text="Player 2:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="283.0" text="Shots:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2Shots" layoutX="100.0" layoutY="283.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="303.0" text="Hits:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2Hits" layoutX="100.0" layoutY="303.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="323.0" text="Ratio:" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2Ratio" layoutX="100.0" layoutY="323.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="player2ShipList" layoutX="20.0" layoutY="353.0" AnchorPane.leftAnchor="20.0" />
    </children>
 </AnchorPane>

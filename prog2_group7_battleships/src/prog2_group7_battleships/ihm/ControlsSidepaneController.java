@@ -1,6 +1,6 @@
 package prog2_group7_battleships.ihm;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
@@ -25,8 +25,14 @@ public class ControlsSidepaneController {
         this.orientationRadioGroup = new ToggleGroup();
         this.orientationRadioGroup.getToggles().addAll(this.horizonalRadio, this.verticalRadio);
         this.orientationRadioGroup.selectToggle(this.verticalRadio);
-
-        this.shipTypeSelectionBox.getItems().addAll(Arrays.asList(ShipType.values()));
+    }
+    
+    public void setShipTypeSelection(ArrayList<ShipType> shipTypes) {
+        this.shipTypeSelectionBox.getItems().clear();
+        for (ShipType shipType : shipTypes) {
+            this.shipTypeSelectionBox.getItems().add(shipType);
+        }
+        this.shipTypeSelectionBox.setValue(shipTypes.get(0));
     }
 
     public Orientation getOrientation() {

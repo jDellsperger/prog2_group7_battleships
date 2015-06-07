@@ -1,5 +1,6 @@
 package prog2_group7_battleships.wrk;
 
+import java.util.ArrayList;
 import prog2_group7_battleships.enums.AIShotType;
 import prog2_group7_battleships.enums.ShipType;
 import prog2_group7_battleships.enums.Orientation;
@@ -11,6 +12,7 @@ public class Game {
 
     private Player player1;
     private Player player2;
+    private Player winner;
     private GameMode mode;
     private GameState state;
 
@@ -23,8 +25,6 @@ public class Game {
 
     public Game() {
         this.state = GameState.MODE_SELECT;
-        this.player1 = new Player();
-        this.player2 = new Player();
         this.shotType = AIShotType.RANDOM_SHOT;
     }
 
@@ -57,6 +57,12 @@ public class Game {
 
     public void setGameMode(GameMode mode) {
         this.mode = mode;
+        this.player1 = new Player("Player 1");
+        if (this.mode == GameMode.MULTI) {
+            this.player2 = new Player("Player 2");
+        } else {
+            this.player2 = new Player("AI");
+        }
         this.state = GameState.P1_PLACEMENT;
     }
 
@@ -67,10 +73,19 @@ public class Game {
                 returnCode = this.player2.shotAt(xCoordinate, yCoordinate);
                 switch (returnCode) {
                     case PLAYER_LOST:
+                        this.player1.incrementShotCount();
+                        this.player1.incrementHitCount();
+                        this.winner = this.player1;
                         this.state = GameState.GAME_OVER;
                         break;
                     case MISSED:
+                        this.player1.incrementShotCount();
                         this.state = GameState.P2_SHOOTING;
+                        break;
+                    case SHIP_HIT:
+                    case SHIP_SUNK:
+                        this.player1.incrementShotCount();
+                        this.player1.incrementHitCount();
                         break;
                 }
                 break;
@@ -78,10 +93,19 @@ public class Game {
                 returnCode = this.player1.shotAt(xCoordinate, yCoordinate);
                 switch (returnCode) {
                     case PLAYER_LOST:
+                        this.player2.incrementShotCount();
+                        this.player2.incrementHitCount();
+                        this.winner = this.player2;
                         this.state = GameState.GAME_OVER;
                         break;
                     case MISSED:
+                        this.player2.incrementShotCount();
                         this.state = GameState.P1_SHOOTING;
+                        break;
+                    case SHIP_HIT:
+                    case SHIP_SUNK:
+                        this.player2.incrementShotCount();
+                        this.player2.incrementHitCount();
                         break;
                 }
                 break;
@@ -264,14 +288,21 @@ public class Game {
                     this.shotType = AIShotType.DETERMINING_SHOT_1;
                 }
         }
+        this.player2.incrementShotCount();
         switch (returnCode) {
             case SHIP_SUNK:
+                this.player2.incrementHitCount();
                 this.shotType = AIShotType.RANDOM_SHOT;
+                break;
+            case SHIP_HIT:
+                this.player2.incrementHitCount();
                 break;
             case MISSED:
                 this.state = GameState.P1_SHOOTING;
                 break;
             case PLAYER_LOST:
+                this.player2.incrementHitCount();
+                this.winner = this.player2;
                 this.state = GameState.GAME_OVER;
                 break;
         }
@@ -310,6 +341,78 @@ public class Game {
                 break;
         }
         return fields;
+    }
+
+    public int getPlayer1ShotCount() {
+        return this.player1.getShotCount();
+    }
+
+    public int getPlayer2ShotCount() {
+        return this.player2.getShotCount();
+    }
+
+    public int getPlayer1HitCount() {
+        return this.player1.getHitCount();
+    }
+
+    public int getPlayer2HitCount() {
+        return this.player2.getHitCount();
+    }
+
+    public int getPlayer1ShotHitRatio() {
+        return this.player1.getShotHitRatio();
+    }
+
+    public int getPlayer2ShotHitRatio() {
+        return this.player2.getShotHitRatio();
+    }
+
+    public ArrayList<Ship> getPlayer1Ships() {
+        return this.player1.getShips();
+    }
+
+    public ArrayList<Ship> getPlayer2Ships() {
+        return this.player2.getShips();
+    }
+
+    public ArrayList<ShipType> getUnplacedShipTypes() {
+        if (this.state == GameState.P1_PLACEMENT) {
+            return this.player1.getUnplacedShipTypes();
+        }
+        return this.player2.getUnplacedShipTypes();
+    }
+
+    public String getActivePlayerName() {
+        String name = "";
+        switch (this.state) {
+            case P1_PLACEMENT:
+            case P1_SHOOTING:
+                name = this.player1.getName();
+                break;
+            case P2_PLACEMENT:
+            case P2_SHOOTING:
+                name = this.player2.getName();
+                break;
+            case GAME_OVER:
+                name = this.winner.getName();
+                break;
+        }
+        return name;
+    }
+    
+    public String getInactivePlayerName() {
+        String name = "";
+        switch (this.state) {
+            case P1_PLACEMENT:
+            case P1_SHOOTING:
+                name = this.player2.getName();
+                break;
+            case P2_PLACEMENT:
+            case P2_SHOOTING:
+                name = this.player1.getName();
+                break;
+        }
+        return name;
     }
 
 }

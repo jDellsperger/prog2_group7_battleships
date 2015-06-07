@@ -1,5 +1,6 @@
 package prog2_group7_battleships.ihm;
 
+import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -7,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import prog2_group7_battleships.ctrl.Controller;
 import prog2_group7_battleships.enums.GameMode;
+import prog2_group7_battleships.wrk.Ship;
 
 public class GUIView implements Viewable {
 
@@ -99,6 +101,7 @@ public class GUIView implements Viewable {
             loader.setLocation(GUIView.class.getResource("StatusSidepane.fxml"));
             this.statusSidepane = (AnchorPane) loader.load();
             this.statusSidepaneCtrl = loader.getController();
+            this.statusSidepaneCtrl.setView(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,6 +138,7 @@ public class GUIView implements Viewable {
 
     @Override
     public void queryPlacement() {
+        this.placementControlsCtrl.setShipTypeSelection(this.ctrl.getUnplacedShipTypes());
         this.rootLayout.setRight(this.placementControls);
         this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields());
         this.rootLayout.setCenter(this.battlefield);
@@ -165,6 +169,7 @@ public class GUIView implements Viewable {
     @Override
     public void queryShooting() {
         this.rootLayout.setCenter(this.battlefield);
+        this.statusSidepaneCtrl.setStatistics();
         this.rootLayout.setRight(this.statusSidepane);
         this.bfCtrl.fillFields(this.ctrl.getActivePlayerFields(), this.ctrl.getInactivePlayerFields());
     }
@@ -206,6 +211,7 @@ public class GUIView implements Viewable {
     public void displayGameOver() {
         this.rootLayout.setRight(null);
         this.rootLayoutController.setStatusMessage("");
+        this.gameOverCtrl.setStatistics();
         this.rootLayout.setCenter(this.gameOverLayout);
     }
 
@@ -217,6 +223,46 @@ public class GUIView implements Viewable {
 
     public void playerSwitched() {
         this.ctrl.playerSwitched();
+    }
+    
+    public int getPlayer1ShotCount() {
+        return this.ctrl.getPlayer1ShotCount();
+    }
+    
+    public int getPlayer2ShotCount() {
+        return this.ctrl.getPlayer2ShotCount();
+    }
+    
+    public int getPlayer1HitCount() {
+        return this.ctrl.getPlayer1HitCount();
+    }
+    
+    public int getPlayer2HitCount() {
+        return this.ctrl.getPlayer2HitCount();
+    }
+    
+    public int getPlayer1ShotHitRatio() {
+        return this.ctrl.getPlayer1ShotHitRatio();
+    }
+    
+    public int getPlayer2ShotHitRatio() {
+        return this.ctrl.getPlayer2ShotHitRatio();
+    }
+    
+    public ArrayList<Ship> getPlayer1Ships() {
+        return this.ctrl.getPlayer1Ships();
+    }
+    
+    public ArrayList<Ship> getPlayer2Ships() {
+        return this.ctrl.getPlayer2Ships();
+    }
+    
+    public String getActivePlayerName() {
+        return this.ctrl.getActivePlayerName();
+    }
+    
+    public String getInactivePlayerName() {
+        return this.ctrl.getInactivePlayerName();
     }
 
 }

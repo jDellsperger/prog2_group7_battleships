@@ -1,5 +1,6 @@
 package prog2_group7_battleships.ctrl;
 
+import java.util.ArrayList;
 import prog2_group7_battleships.enums.GameMode;
 import prog2_group7_battleships.enums.GameState;
 import prog2_group7_battleships.enums.Orientation;
@@ -8,6 +9,7 @@ import prog2_group7_battleships.enums.ShipType;
 import prog2_group7_battleships.ihm.Viewable;
 import prog2_group7_battleships.wrk.Field;
 import prog2_group7_battleships.wrk.Game;
+import prog2_group7_battleships.wrk.Ship;
 
 public class Controller {
 
@@ -108,6 +110,50 @@ public class Controller {
 
     public void playerSwitched() {
         this.stateSwitch();
+    }
+    
+    public int getPlayer1ShotCount() {
+        return this.game.getPlayer1ShotCount();
+    }
+    
+    public int getPlayer2ShotCount() {
+        return this.game.getPlayer2ShotCount();
+    }
+    
+    public int getPlayer1HitCount() {
+        return this.game.getPlayer1HitCount();
+    }
+    
+    public int getPlayer2HitCount() {
+        return this.game.getPlayer2HitCount();
+    }
+    
+    public int getPlayer1ShotHitRatio() {
+        return this.game.getPlayer1ShotHitRatio();
+    }
+    
+    public int getPlayer2ShotHitRatio() {
+        return this.game.getPlayer2ShotHitRatio();
+    }
+
+    public ArrayList<Ship> getPlayer1Ships() {
+        return this.game.getPlayer1Ships();
+    }
+
+    public ArrayList<Ship> getPlayer2Ships() {
+        return this.game.getPlayer2Ships();
+    }
+    
+    public ArrayList<ShipType> getUnplacedShipTypes() {
+        return this.game.getUnplacedShipTypes();
+    }
+    
+    public String getActivePlayerName() {
+        return this.game.getActivePlayerName();
+    }
+    
+    public String getInactivePlayerName() {
+        return this.game.getInactivePlayerName();
     }
 
 }

@@ -9,18 +9,24 @@ public class Player {
 
     private final ArrayList<Ship> ships;
     private final Board board;
+    private Double shotCounter;
+    private Double hitCounter;
+    private String name;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
+        this.shotCounter = 0.0;
+        this.hitCounter = 0.0;
         this.board = new Board();
-        ships = new ArrayList();
+        this.ships = new ArrayList();
         for (ShipType value : ShipType.values()) {
             Ship ship = new Ship(value);
-            ships.add(ship);
+            this.ships.add(ship);
         }
     }
 
     private Ship getUnplacedShipByType(ShipType type) {
-        for (Ship ship : ships) {
+        for (Ship ship : this.ships) {
             if (ship.getType() == type && !ship.isPlaced()) {
                 return ship;
             }
@@ -66,7 +72,7 @@ public class Player {
 
     private boolean hasUnsunkShips() {
         boolean hasUnsunkShips = false;
-        for (Ship ship : ships) {
+        for (Ship ship : this.ships) {
             if (!ship.isSunk()) {
                 hasUnsunkShips = true;
                 break;
@@ -77,6 +83,48 @@ public class Player {
 
     public Field[][] getFields() {
         return this.board.getFields();
+    }
+
+    public int getShotCount() {
+        return this.shotCounter.intValue();
+    }
+
+    public int getHitCount() {
+        return this.hitCounter.intValue();
+    }
+
+    public int getShotHitRatio() {
+        if (this.shotCounter > 0) {
+            Double ratio = (hitCounter / shotCounter) * 100;
+            return ratio.intValue();
+        }
+        return 0;
+    }
+
+    public void incrementShotCount() {
+        this.shotCounter++;
+    }
+
+    public void incrementHitCount() {
+        this.hitCounter++;
+    }
+
+    public ArrayList<Ship> getShips() {
+        return this.ships;
+    }
+
+    public ArrayList<ShipType> getUnplacedShipTypes() {
+        ArrayList<ShipType> unplacedShipTypes = new ArrayList();
+        for (ShipType type : ShipType.values()) {
+            if(null != this.getUnplacedShipByType(type)) {
+                unplacedShipTypes.add(type);
+            }
+        }
+        return unplacedShipTypes;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }

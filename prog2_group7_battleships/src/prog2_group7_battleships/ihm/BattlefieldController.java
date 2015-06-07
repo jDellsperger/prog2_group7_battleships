@@ -19,6 +19,8 @@ public class BattlefieldController {
     @FXML
     private GridPane gridOpponent;
     @FXML
+    private Label playerGridLabel;
+    @FXML
     private Label opponentGridLabel;
 
     @FXML
@@ -38,6 +40,7 @@ public class BattlefieldController {
         Ship tempShip;
         this.gridOpponent.setVisible(false);
         this.opponentGridLabel.setVisible(false);
+        this.playerGridLabel.setText(this.view.getActivePlayerName() + " Board");
 
         for (int x = 0; x < Board.BOARD_LENGTH; x++) {
             for (int y = 0; y < Board.BOARD_LENGTH; y++) {
@@ -96,6 +99,7 @@ public class BattlefieldController {
         fillFields(playerFields);
         this.gridOpponent.setVisible(true);
         this.opponentGridLabel.setVisible(true);
+        this.opponentGridLabel.setText(this.view.getInactivePlayerName() + " Board");
 
         Field tempField;
         Ship tempShip;
